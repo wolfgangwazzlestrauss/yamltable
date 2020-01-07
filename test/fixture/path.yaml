@@ -1,0 +1,96 @@
+schema:
+  $schema: http://json-schema.org/draft-07/schema#
+  description: file system path metadata schema
+  type: object
+  properties:
+    name:
+      type: string
+      pattern: "^[\\w-]+$"
+    description:
+      type: string
+    source:
+      oneOf:
+      - type: "null"
+      - type: string
+        pattern: "^((/|\\$)[\\w\\s.]+)+$"
+    dest:
+      oneOf:
+      - type: string
+      - type: object
+        properties:
+          darwin:
+            type: string
+          linux:
+            type: string
+          windows:
+            type: string
+        required:
+        - darwin
+        - linux
+        - windows
+    type:
+      type: string
+      enum:
+      - directory
+      - file
+  required:
+  - name
+  - description
+  - source
+  - dest
+  - type
+rows:
+- name: repo
+  dest: $HOME/repo
+  description: GitHub repository directory
+  type: directory
+  source: null
+- name: ssh
+  dest: $HOME/.ssh
+  description: Secure SHell settings
+  type: directory
+  source: $HOME/drive/auth/.ssh
+- name: bash-profile
+  dest: $HOME/.bash_profile
+  description: BASH settings
+  type: file
+  source: null
+- name: system
+  dest: $HOME/system
+  description: link to system settings
+  type: directory
+  source: $HOME/repo/system
+- name: bash-key
+  dest: $HOME/.bash_key
+  description: general secrets
+  type: file
+  source: $HOME/drive/auth/.bash_key
+- name: drive
+  dest: $HOME/drive
+  description: cloud storage drive
+  type: directory
+  source: null
+- name: vscode-settings
+  dest:
+    darwin: $HOME/Library/Application Support/Code/User/settings.json
+    linux: $HOME/.config/Code/User/settings.json
+    windows: $HOME/AppData/Roaming/Code/User/snippets/settings.json
+  description: VSCode settings
+  type: file
+  source: $HOME/system/cfg/vscode/settings.json
+- name: vscode-keybindings
+  dest:
+    darwin: $HOME/Library/Application Support/Code/User/keybindings.json
+    linux: $HOME/.config/Code/User/keybindings.json
+    windows: $HOME/AppData/Roaming/Code/User/snippets/keybindings.json
+  description: VSCode keybindings
+  type: file
+  source: $HOME/system/cfg/vscode/keybindings.json
+- name: vscode-snippets
+  dest:
+    darwin: $HOME/Library/Application Support/Code/User/snippets
+    linux: $HOME/.config/Code/User/snippets
+    windows: $HOME/AppData/Roaming/Code/User/snippets/snippets
+  description: VSCode snippets
+  type: directory
+  source: $HOME/system/cfg/vscode/snippets

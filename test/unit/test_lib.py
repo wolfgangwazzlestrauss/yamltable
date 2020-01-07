@@ -53,7 +53,7 @@ class TestRead(unittest.TestCase):
 
         expected = [{"mock_key": 1}, {"mock_key": 5}]
         with mock.patch("builtins.open", mock.mock_open(read_data=file_data)):
-            actual = yamltable.read("mock_file_path.yaml")
+            actual, _ = yamltable.read("mock_file_path.yaml")
         self.assertEqual(actual, expected)
 
 

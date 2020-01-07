@@ -13,7 +13,7 @@ def test_sample(tmp_path: pathlib.Path) -> None:
     yaml_file = tmp_path / "file.yaml"
     yaml_file.write_text("- foo: 1\n  bar: 4\n- foo: 3\n  bar: 2\n")
 
-    dicts = yamltable.read(yaml_file)
+    dicts, _ = yamltable.read(yaml_file)
     sorted_dicts = yamltable.sort("bar", dicts)
     yamltable.write(yaml_file, sorted_dicts)
 

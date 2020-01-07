@@ -1,13 +1,15 @@
 """Library functions for YamlTable."""
 
 
-from typing import Any, Iterable, List
+import pprint
+from typing import Any, Iterable, List, Optional, Tuple
 
+import fastjsonschema
 import yaml
-from yamltable.typing import Path, Row
+from yamltable.typing import Path, Row, Schema
 
 
-def read(file_path: Path) -> List[Row]:
+def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
     """Read data from YAML file.
 
     :param file_path: YAML file path
@@ -15,11 +17,19 @@ def read(file_path: Path) -> List[Row]:
     :raise TypeError: if file is not organized as a list
     """
 
-    with open(file_path, "r") as handle:
-        rows = yaml.safe_load(handle)
+    try:
+        with open(file_path, "r") as handle:
+            data = yaml.safe_load(handle)
+    except (yaml.scanner.ScannerError, yaml.parser.ParserError) as xcpt:
+        raise TypeError(f"invalid YAML file: {xcpt}")
 
-    if isinstance(rows, list):
-        return rows
+    if isinstance(data, list):
+        return data, None
+    elif isinstance(data, dict):
+        try:
+            return data["rows"], data["schema"]
+        except KeyError:
+            raise TypeError("YAML file does not have a schema and rows organization")
     else:
         raise TypeError("YAML file does not contain a list")
 
@@ -47,7 +57,31 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     return sorted(rows, key=lambda row: row[key])
 
 
-def write(file_path: Path, rows: List[Row], sort_keys: bool = False) -> None:
+def validate(rows: Iterable[Row], schema: Schema) -> None:
+    """Check that each row satisfies the schema.
+
+    :param rows:
+    :param schema:
+    :return:
+    """
+
+    try:
+        validator = fastjsonschema.compile(schema)
+    except fastjsonschema.JsonSchemaDefinitionException as xcpt:
+        print(f"error: schema definition: {xcpt}")
+        return
+
+    for row in rows:
+        try:
+            validator(row)
+        except fastjsonschema.JsonSchemaException as xcpt:
+            print(xcpt)
+            pprint.pprint(row, indent=2)
+
+
+def write(
+    file_path: Path, rows: List[Row], schema: Optional[Schema] = None, sort_keys: bool = False
+) -> None:
     """Write data to YAML file.
 
     Additional sorts dictionary keys.
@@ -56,5 +90,10 @@ def write(file_path: Path, rows: List[Row], sort_keys: bool = False) -> None:
     :param rows: list of dictionaries to write
     """
 
-    with open(file_path, "w") as handle:
-        yaml.dump(rows, handle, sort_keys=sort_keys)
+    if schema is None:
+        with open(file_path, "w") as handle:
+            yaml.dump(rows, handle, sort_keys=sort_keys)
+    else:
+        data = {"schema": schema, "rows": rows}
+        with open(file_path, "w") as handle:
+            yaml.dump(data, handle, sort_keys=sort_keys)
