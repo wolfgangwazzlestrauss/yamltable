@@ -9,10 +9,10 @@ import yamltable
 
 
 def main() -> None:
-    """Command line interface for YAML sorter."""
+    """Command line interface for YamlTable."""
 
     parser = argparse.ArgumentParser(
-        description="utilities for for working with list organized YAML files"
+        description="utilities for working with list organized YAML files"
     )
     parser.add_argument("-d", "--debug", action="store_true", help="run yamltable in debug mode")
     parser.add_argument("-v", "--version", action="version")
