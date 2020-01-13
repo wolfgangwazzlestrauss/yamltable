@@ -5,6 +5,7 @@ import argparse
 import pdb
 import pprint
 
+import fastjsonschema
 import yamltable
 
 
@@ -76,7 +77,10 @@ def worker(args: argparse.Namespace) -> None:
         yamltable.write(args.file_path, sorted_dicts, schema)
     elif args.command == "validate":
         if schema is not None:
-            yamltable.validate(dicts, schema)
+            try:
+                yamltable.validate(dicts, schema)
+            except fastjsonschema.JsonSchemaDefinitionException as xcpt:
+                print(f"error: schema definition: {xcpt}")
         else:
             print("error: YAML file contains no schema")
 

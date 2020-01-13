@@ -6,7 +6,7 @@ from unittest import mock
 
 import pytest
 import yamltable
-from yamltable.typing import Row
+from yamltable.typing import Row, Schema
 
 
 @pytest.mark.parametrize(
@@ -53,6 +53,50 @@ def test_sort() -> None:
 
     expected = [{"mock_key_1": 2, "mock_key_2": 3}, {"mock_key_1": 1, "mock_key_2": 5}]
     actual = yamltable.sort("mock_key_2", dicts)
+    assert actual == expected
+
+
+def test_validate_bad_schema() -> None:
+    """Check that validation works for unnested list of dictionaries."""
+
+    schema = {"type": "data"}
+    dicts = [{"mock_key_1": 1, "mock_key_2": 5}, {"mock_key_1": 2, "mock_key_2": 3}]
+
+    expected = (False, -1, "invalid schema: Unknown type: 'data'")
+    actual = yamltable.validate(dicts, schema)
+    assert actual == expected
+
+
+@pytest.fixture
+def schema(scope: str = "module") -> Schema:
+    """Create reusable JSON schema object."""
+
+    return {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {"mock_key_1": {"type": "number"}, "mock_key_2": {"type": "number"}},
+        "required": ["mock_key_1", "mock_key_2"],
+        "additionalProperties": "false",
+    }
+
+
+def test_validate_bad_data(schema: Schema) -> None:
+    """Check that validation works for unnested list of dictionaries."""
+
+    dicts = [{"mock_key_1": 1, "mock_key_2": 5}, {"mock_key_1": 2, "mock_key_2": False}]
+
+    expected = (False, 1, "data.mock_key_2 must be number")
+    actual = yamltable.validate(dicts, schema)
+    assert actual == expected
+
+
+def test_validate_good_data(schema: Schema) -> None:
+    """Check that validation works for unnested list of dictionaries."""
+
+    dicts = [{"mock_key_1": 1, "mock_key_2": 5}, {"mock_key_1": 2, "mock_key_2": 3}]
+
+    expected = (True, -1, "")
+    actual = yamltable.validate(dicts, schema)
     assert actual == expected
 
 

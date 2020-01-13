@@ -1,7 +1,6 @@
 """Library functions for YamlTable."""
 
 
-import pprint
 from typing import Any, Iterable, List, Optional, Tuple
 
 import fastjsonschema
@@ -57,26 +56,26 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     return sorted(rows, key=lambda row: row[key])
 
 
-def validate(rows: Iterable[Row], schema: Schema) -> None:
+def validate(rows: Iterable[Row], schema: Schema) -> Tuple[bool, int, str]:
     """Check that each row satisfies the schema.
 
-    :param rows:
-    :param schema:
-    :return:
+    :param rows: dictionaries to validate
+    :param schema: JSON schema for validation
+    :return: whether all rows are valid, invalid row index or -1, invalid error message
     """
 
     try:
         validator = fastjsonschema.compile(schema)
     except fastjsonschema.JsonSchemaDefinitionException as xcpt:
-        print(f"error: schema definition: {xcpt}")
-        return
+        return False, -1, f"invalid schema: {xcpt}"
 
-    for row in rows:
+    for idx, row in enumerate(rows):
         try:
             validator(row)
         except fastjsonschema.JsonSchemaException as xcpt:
-            print(xcpt)
-            pprint.pprint(row, indent=2)
+            return False, idx, xcpt.message
+
+    return True, -1, ""
 
 
 def write(
