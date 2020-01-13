@@ -18,25 +18,33 @@ def main() -> None:
     parser.add_argument("-v", "--version", action="version")
     subparser = parser.add_subparsers(dest="command", required=True)
 
-    validate_parser = subparser.add_parser(name="validate", description="validate dictionaries")
-    validate_parser.add_argument("file_path", type=str, help="YAML file location")
-
-    list_parser = subparser.add_parser(name="list", description="list dictionary key values")
+    list_parser = subparser.add_parser(
+        name="list", description="list dictionary key values", help="list dictionary key values"
+    )
     list_parser.add_argument("key", type=str, help="dictionary key")
     list_parser.add_argument("file_path", type=str, help="YAML file location")
 
     search_parser = subparser.add_parser(
-        name="search", description="search dictionaries by key and value"
+        name="search",
+        description="search dictionaries by key and value",
+        help="search dictionaries by key and value",
     )
     search_parser.add_argument("key", type=str, help="dictionary key")
     search_parser.add_argument("value", help="key value")
     search_parser.add_argument("file_path", type=str, help="YAML file location")
 
     sort_parser = subparser.add_parser(
-        name="sort", description="sort dictionaries by key and value"
+        name="sort",
+        description="sort dictionaries by key and value",
+        help="sort dictionaries by key and value",
     )
     sort_parser.add_argument("key", type=str, help="dictionary key")
     sort_parser.add_argument("file_path", type=str, help="YAML file location")
+
+    validate_parser = subparser.add_parser(
+        name="validate", description="validate dictionaries", help="validate dictionaries"
+    )
+    validate_parser.add_argument("file_path", type=str, help="YAML file location")
 
     args = parser.parse_args()
     if args.debug:
