@@ -19,8 +19,12 @@ def list_(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = 
     :param schema: JSON schema for YAML file
     """
 
-    for row in rows:
-        print(row[args.key])
+    for idx, row in enumerate(rows):
+        try:
+            print(row[args.key])
+        except KeyError:
+            print(f"error: row {idx} does not have key {args.key}")
+            break
 
 
 def main() -> None:
@@ -92,8 +96,12 @@ def sort(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = N
     :param schema: JSON schema for YAML file
     """
 
-    sorted_rows = yamltable.sort(args.key, rows)
-    yamltable.write(args.file_path, sorted_rows, schema)
+    try:
+        sorted_rows = yamltable.sort(args.key, rows)
+    except TypeError as xcpt:
+        print(f"error: {xcpt}")
+    else:
+        yamltable.write(args.file_path, sorted_rows, schema)
 
 
 def validate(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
