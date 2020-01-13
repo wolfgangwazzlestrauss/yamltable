@@ -1,4 +1,4 @@
-"""Functional test functions from the yamltable module."""
+"""Integration tests for the yamltable module."""
 
 
 import pathlib
