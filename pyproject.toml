@@ -30,7 +30,7 @@ keywords = ["yaml"]
 license = "MIT"
 name = "yamltable"
 readme = "readme.md"
-version = "0.0.2"
+version = "0.0.3"
 
 [tool.poetry.dependencies]
 fastjsonschema = "^2.14.2"
@@ -49,6 +49,7 @@ pytest-cov = "^2.8.1"
 sphinx = "^2.3.1"
 sphinx_rtd_theme = "^0.4.3"
 tox = "^3.14.3"
+toml = "^0.10.0"
 
 [tool.poetry.scripts]
 yamltable = "yamltable.main:main"

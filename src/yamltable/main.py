@@ -34,7 +34,7 @@ def main() -> None:
         description="utilities for working with list organized YAML files"
     )
     parser.add_argument("-d", "--debug", action="store_true", help="run yamltable in debug mode")
-    parser.add_argument("-v", "--version", action="version")
+    parser.add_argument("-v", "--version", action="version", version=yamltable.__version__)
     subparser = parser.add_subparsers(dest="command", required=True)
 
     list_parser = subparser.add_parser(
