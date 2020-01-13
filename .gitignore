@@ -12,3 +12,7 @@ dist/*
 doc/build/*
 poetry.lock
 *.pyc
+
+# Temporary
+.dockerignore
+dockerfile

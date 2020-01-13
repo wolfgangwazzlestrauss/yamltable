@@ -31,7 +31,7 @@ def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
         except KeyError:
             raise TypeError("YAML file does not have a schema and rows organization")
     else:
-        raise TypeError("YAML file does not contain a list")
+        raise TypeError("YAML file is not organized in a tabular format")
 
 
 def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
