@@ -1,12 +1,18 @@
 .coverage
+.DS_Store
 .mypy_cache/*
 .pytest_cache/*
 .tox/*
 .venv/*
-.venv/*
 .vscode/*
-**/*.egg-info/*
 **/__pycache__/*
+**/.ipynb_checkpoints/*
+**/*.egg-info/*
 dist/*
 doc/build/*
 poetry.lock
+*.pyc
+
+# Temporary
+.dockerignore
+dockerfile
