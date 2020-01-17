@@ -11,9 +11,14 @@ from yamltable.typing import Path, Row, Schema
 def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
     """Read data from YAML file.
 
-    :param file_path: YAML file path
-    :return: YAML data
-    :raise TypeError: if file is not organized as a list
+    Args:
+        file_path: YAML file path
+
+    Raises:
+        if file is not organized as a list
+
+    Return:
+        YAML data
     """
 
     try:
@@ -36,10 +41,13 @@ def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
 def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
     """Search dictionaries by key and value.
 
-    :param key: search key
-    :param val: key comparison value
-    :param rows: dictionaries to search
-    :return: matching dictionaries
+    Args:
+        key: search key
+        val: key comparison value
+        rows: dictionaries to search
+
+    Return:
+        matching dictionaries
     """
 
     return [row for row in rows if key in row and row[key] == val]
@@ -48,9 +56,12 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
 def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     """Sort dictionaries based on value for supplied key name.
 
-    :param key: search key
-    :param rows: dictionaries to sort
-    :return: list of sorted dictionaries
+    Args:
+        key: search key
+        rows: dictionaries to sort
+
+    Return:
+        list of sorted dictionaries
     """
 
     return sorted(rows, key=lambda row: row[key])
@@ -59,9 +70,12 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
 def validate(rows: Iterable[Row], schema: Schema) -> Tuple[bool, int, str]:
     """Check that each row satisfies the schema.
 
-    :param rows: dictionaries to validate
-    :param schema: JSON schema for validation
-    :return: whether all rows are valid, invalid row index or -1, invalid error message
+    Args:
+        rows: dictionaries to validate
+        schema: JSON schema for validation
+
+    Return:
+        whether all rows are valid, invalid row index or -1, invalid error message
     """
 
     try:
@@ -83,10 +97,11 @@ def write(
 ) -> None:
     """Write data to YAML file.
 
-    Additional sorts dictionary keys.
-
-    :param file_path: YAML file path
-    :param rows: list of dictionaries to write
+    Args:
+        file_path: YAML file path
+        rows: list of dictionaries to write
+        schema: JSON schema dictionary
+        sort_keys: whether to sort row keys
     """
 
     if schema is None:

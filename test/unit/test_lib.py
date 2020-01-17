@@ -69,7 +69,11 @@ def test_validate_bad_schema() -> None:
 
 @pytest.fixture
 def schema(scope: str = "module") -> Schema:
-    """Create reusable JSON schema object."""
+    """Create reusable JSON schema object.
+
+    Return:
+        JSON schema dictionary
+    """
 
     return {
         "$schema": "http://json-schema.org/draft-07/schema#",

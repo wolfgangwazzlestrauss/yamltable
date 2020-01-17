@@ -14,9 +14,10 @@ from yamltable.typing import Row, Schema
 def list_(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
     """List dictionary key values.
 
-    :param args: command line arguments
-    :param rows: YAML file dictionaries
-    :param schema: JSON schema for YAML file
+    Args:
+        args: command line arguments
+        rows: YAML file dictionaries
+        schema: JSON schema for YAML file
     """
 
     for idx, row in enumerate(rows):
@@ -28,7 +29,21 @@ def list_(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = 
 
 
 def main() -> None:
-    """Command line interface for YamlTable."""
+    """Command line entrypoint for YamlTable."""
+
+    args = parse_args()
+    if args.debug:
+        pdb.runcall(worker, args)
+    else:
+        worker(args)
+
+
+def parse_args() -> argparse.Namespace:
+    """Parse command line arguments into organized namespace.
+
+    Return:
+        organized namespace of command line arguments
+    """
 
     parser = argparse.ArgumentParser(
         description="utilities for working with list organized YAML files"
@@ -69,19 +84,16 @@ def main() -> None:
     validate_parser.add_argument("file_path", type=str, help="YAML file location")
     validate_parser.set_defaults(func=validate)
 
-    args = parser.parse_args()
-    if args.debug:
-        pdb.runcall(worker, args)
-    else:
-        worker(args)
+    return parser.parse_args()
 
 
 def search(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
     """Search dictionaries for matching key and value.
 
-    :param args: command line arguments
-    :param rows: YAML file dictionaries
-    :param schema: JSON schema for YAML file
+    Args:
+        args: command line arguments
+        rows: YAML file dictionaries
+        schema: JSON schema for YAML file
     """
 
     for match in yamltable.search(args.key, args.value, rows):
@@ -91,9 +103,10 @@ def search(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] =
 def sort(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
     """Sort dictionaries by key values.
 
-    :param args: command line arguments
-    :param rows: YAML file dictionaries
-    :param schema: JSON schema for YAML file
+    Args:
+        args: command line arguments
+        rows: YAML file dictionaries
+        schema: JSON schema for YAML file
     """
 
     try:
@@ -107,9 +120,10 @@ def sort(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = N
 def validate(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
     """Check that every dictionary has valid format.
 
-    :param args: command line arguments
-    :param rows: YAML file dictionaries
-    :param schema: JSON schema for YAML file
+    Args:
+        args: command line arguments
+        rows: YAML file dictionaries
+        schema: JSON schema for YAML file
     """
 
     if schema is not None:
@@ -124,7 +138,8 @@ def validate(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema]
 def worker(args: argparse.Namespace) -> None:
     """Execute yamltable functionality
 
-    :param args: command line arguments
+    Args:
+        args: command line arguments
     """
 
     try:
