@@ -13,7 +13,9 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.abspath("..")))
+import yamltable
+
+sys.path.insert(0, os.path.abspath(".."))
 
 
 # -- Project information -----------------------------------------------------
@@ -23,7 +25,7 @@ copyright = "2019, Macklan Weinstein"
 author = "Macklan Weinstein"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = yamltable.__version__
 
 
 # -- General configuration ---------------------------------------------------
