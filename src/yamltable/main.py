@@ -50,7 +50,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("-d", "--debug", action="store_true", help="run yamltable in debug mode")
     parser.add_argument("-v", "--version", action="version", version=yamltable.__version__)
-    subparser = parser.add_subparsers(dest="command", required=True)
+    subparser = parser.add_subparsers(
+        dest="command", title="commands", metavar="command", required=True
+    )
 
     list_parser = subparser.add_parser(
         name="list", description="list dictionary key values", help="list dictionary key values"
