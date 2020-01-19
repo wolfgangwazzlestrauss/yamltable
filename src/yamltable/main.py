@@ -6,7 +6,6 @@ import pdb
 import pprint
 from typing import List, Optional
 
-import fastjsonschema
 import yamltable
 from yamltable.typing import Row, Schema
 
@@ -149,13 +148,13 @@ def validate(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema]
         schema: JSON schema for YAML file
     """
 
-    if schema is not None:
-        try:
-            yamltable.validate(rows, schema)
-        except fastjsonschema.JsonSchemaDefinitionException as xcpt:
-            print(f"error: schema definition: {xcpt}")
+    valid, row, msg = yamltable.validate(rows, schema)
+    if valid:
+        print("YAML file rows conform to its schema")
+    elif row == -1:
+        print(f"invalid schema: {msg}")
     else:
-        print("error: YAML file contains no schema")
+        print(f"invalid row {row}: {msg}")
 
 
 def worker(args: argparse.Namespace) -> None:
@@ -167,7 +166,7 @@ def worker(args: argparse.Namespace) -> None:
 
     try:
         rows, schema = yamltable.read(args.file_path)
-    except TypeError as xcpt:
+    except (FileNotFoundError, TypeError) as xcpt:
         print(xcpt)
     else:
         args.func(args, rows, schema)

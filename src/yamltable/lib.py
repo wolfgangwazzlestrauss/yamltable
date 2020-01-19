@@ -15,7 +15,8 @@ def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
         file_path: YAML file path
 
     Raises:
-        if file is not organized as a list
+        FileNotFoundError: if unable to find file path
+        TypeError: if file is not organized as a list
 
     Return:
         YAML data
@@ -67,7 +68,7 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     return sorted(rows, key=lambda row: row[key])
 
 
-def validate(rows: Iterable[Row], schema: Schema) -> Tuple[bool, int, str]:
+def validate(rows: Iterable[Row], schema: Optional[Schema]) -> Tuple[bool, int, str]:
     """Check that each row satisfies the schema.
 
     Args:
@@ -80,7 +81,7 @@ def validate(rows: Iterable[Row], schema: Schema) -> Tuple[bool, int, str]:
 
     try:
         validator = fastjsonschema.compile(schema)
-    except fastjsonschema.JsonSchemaDefinitionException as xcpt:
+    except (fastjsonschema.JsonSchemaDefinitionException, TypeError) as xcpt:
         return False, -1, f"invalid schema: {xcpt}"
 
     for idx, row in enumerate(rows):
