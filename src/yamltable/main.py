@@ -11,6 +11,26 @@ import yamltable
 from yamltable.typing import Row, Schema
 
 
+class SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
+    """Help formatter for removing metavar line from subcommand listing."""
+
+    def _format_action(self, action: argparse.Action) -> str:
+        """Remove metavar line in subparser listing.
+
+        Args:
+            argparse action
+
+        Return:
+            command line formatted into string
+        """
+
+        parts = super(argparse.RawDescriptionHelpFormatter, self)._format_action(action)
+        if action.nargs == argparse.PARSER:
+            parts = "\n".join(parts.split("\n")[1:])
+
+        return parts
+
+
 def list_(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
     """List dictionary key values.
 
@@ -46,12 +66,13 @@ def parse_args() -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser(
-        description="utilities for working with list organized YAML files"
+        description="utilities for working with list organized YAML files",
+        formatter_class=SubcommandHelpFormatter,
     )
     parser.add_argument("-d", "--debug", action="store_true", help="run yamltable in debug mode")
     parser.add_argument("-v", "--version", action="version", version=yamltable.__version__)
     subparser = parser.add_subparsers(
-        dest="command", title="commands", metavar="command", required=True
+        dest="command", title="commands", metavar="<command>", required=True
     )
 
     list_parser = subparser.add_parser(
