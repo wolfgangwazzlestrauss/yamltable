@@ -1,6 +1,7 @@
 """Unit test functions from the yamltable module."""
 
 
+import pathlib
 from typing import List
 from unittest import mock
 
@@ -17,7 +18,7 @@ def test_read_bad_data(file_data: str) -> None:
 
     with mock.patch("builtins.open", mock.mock_open(read_data=file_data)):
         with pytest.raises(TypeError):
-            yamltable.read("mock_file_path.yaml")
+            yamltable.read(pathlib.Path("mock_file_path.yaml"))
 
 
 @pytest.mark.parametrize(
@@ -31,7 +32,7 @@ def test_read_good_data(file_data: str, expected: List[Row]) -> None:
     """Check that reader correctly reads data that is a list."""
 
     with mock.patch("builtins.open", mock.mock_open(read_data=file_data)):
-        actual, _ = yamltable.read("mock_file_path.yaml")
+        actual, _ = yamltable.read(pathlib.Path("mock_file_path.yaml"))
 
     assert actual == expected
 
