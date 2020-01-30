@@ -46,10 +46,11 @@ mypy = "^0.761"
 pre-commit = "^1.21.0"
 pytest = "^5.2"
 pytest-cov = "^2.8.1"
+pytest-mock = "^2.0.0"
 sphinx = "^2.3.1"
 sphinx_rtd_theme = "^0.4.3"
-tox = "^3.14.3"
 toml = "^0.10.0"
+tox = "^3.14.3"
 
 [tool.poetry.scripts]
 yamltable = "yamltable.main:app"
