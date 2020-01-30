@@ -1,9 +1,7 @@
 """Library types for YamlTable."""
 
 
-import pathlib
-from typing import Any, Dict, Union
+from typing import Any, Dict
 
-Path = Union[str, pathlib.Path]
 Row = Dict[str, Any]
 Schema = Dict[str, Any]

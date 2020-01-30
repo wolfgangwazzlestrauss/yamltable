@@ -3,5 +3,5 @@
 from yamltable.lib import read, search, sort, validate, write
 
 __all__ = ["read", "search", "sort", "validate", "write"]
-__author__ = "wolfgangwazzlestrauss"
-__version__ = "0.0.4"
+__author__ = "Macklan Weinstein"
+__version__ = "0.0.5"
