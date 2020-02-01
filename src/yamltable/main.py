@@ -1,10 +1,10 @@
 """Command line interface for YamlTable."""
 
 
+import bdb
 import enum
 import pathlib
-
-# import pdb  TODO: reimplement pdb support
+import pdb
 import pprint
 from typing import List, Optional, Tuple
 
@@ -23,6 +23,20 @@ class Code(enum.Enum):
     ERROR = 2
 
 
+class Debugger:
+    """Context for running interactive debug sessions."""
+
+    state = False
+
+    @classmethod
+    def launch(cls) -> None:
+        """Launch interactive debug session if state is True."""
+
+        if cls.state:
+            typer.secho("Launching interactive debug session...")
+            pdb.set_trace()
+
+
 class Msg(enum.Enum):
     """Colors for message types."""
 
@@ -34,6 +48,8 @@ class Msg(enum.Enum):
 @app.command()
 def list(key: str, file_path: pathlib.Path) -> None:
     """List all dictionary KEY values in FILE_PATH."""
+
+    Debugger.launch()
 
     rows, _ = load_data(file_path)
     for idx, row in enumerate(rows):
@@ -62,9 +78,18 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
         raise typer.Exit(code=Code.ERROR.value)
 
 
+@app.callback()
+def main(debug: bool = typer.Option(False, help="Run with interactive debug session.")) -> None:
+    """Utility for working with YAML files organized similar to a relational database table."""
+
+    Debugger.state = debug
+
+
 @app.command()
 def search(key: str, value: str, file_path: pathlib.Path) -> None:
     """Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
+
+    Debugger.launch()
 
     rows, _ = load_data(file_path)
 
@@ -83,6 +108,8 @@ def search(key: str, value: str, file_path: pathlib.Path) -> None:
 def sort(key: str, file_path: pathlib.Path) -> None:
     """Sort dictionaries in FILE_PATH by KEY values."""
 
+    Debugger.launch()
+
     rows, schema = load_data(file_path)
     try:
         sorted_rows = yamltable.sort(key, rows)
@@ -97,6 +124,8 @@ def sort(key: str, file_path: pathlib.Path) -> None:
 def validate(file_path: pathlib.Path) -> None:
     """Check that every dictionary in FILE_PATH has conforms to its schema."""
 
+    Debugger.launch()
+
     rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
     if valid:
@@ -110,4 +139,7 @@ def validate(file_path: pathlib.Path) -> None:
 
 
 if __name__ == "__main__":
-    app()
+    try:
+        app()
+    except bdb.BdbQuit:
+        print("looks like you are quitting")
