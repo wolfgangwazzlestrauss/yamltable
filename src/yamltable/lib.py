@@ -1,14 +1,15 @@
 """Library functions for YamlTable."""
 
 
+import pathlib
 from typing import Any, Iterable, List, Optional, Tuple
 
 import fastjsonschema
 import yaml
-from yamltable.typing import Path, Row, Schema
+from yamltable.typing import Row, Schema
 
 
-def read(file_path: Path) -> Tuple[List[Row], Optional[Schema]]:
+def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     """Read data from YAML file.
 
     Args:
@@ -94,7 +95,10 @@ def validate(rows: Iterable[Row], schema: Optional[Schema]) -> Tuple[bool, int, 
 
 
 def write(
-    file_path: Path, rows: List[Row], schema: Optional[Schema] = None, sort_keys: bool = False
+    file_path: pathlib.Path,
+    rows: List[Row],
+    schema: Optional[Schema] = None,
+    sort_keys: bool = False,
 ) -> None:
     """Write data to YAML file.
 

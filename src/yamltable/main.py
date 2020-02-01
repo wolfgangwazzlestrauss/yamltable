@@ -1,176 +1,146 @@
 """Command line interface for YamlTable."""
 
 
-import argparse
+import enum
+import pathlib
 import pdb
 import pprint
-from typing import List, Optional
+from typing import List, Optional, Tuple
+
+import typer
 
 import yamltable
 from yamltable.typing import Row, Schema
 
 
-class SubcommandHelpFormatter(argparse.RawDescriptionHelpFormatter):
-    """Help formatter for removing metavar line from subcommand listing."""
-
-    def _format_action(self, action: argparse.Action) -> str:
-        """Remove metavar line in subparser listing.
-
-        Args:
-            argparse action
-
-        Return:
-            command line formatted into string
-        """
-
-        parts = super(argparse.RawDescriptionHelpFormatter, self)._format_action(action)
-        if action.nargs == argparse.PARSER:
-            parts = "\n".join(parts.split("\n")[1:])
-
-        return parts
+FileArg = typer.Argument(..., dir_okay=False, exists=True, file_okay=True, resolve_path=True)
 
 
-def list_(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
-    """List dictionary key values.
+app = typer.Typer()
 
-    Args:
-        args: command line arguments
-        rows: YAML file dictionaries
-        schema: JSON schema for YAML file
-    """
 
+class Code(enum.Enum):
+    """Exit code statuses."""
+
+    SUCCESS = 0
+    INVALID = 1
+    ERROR = 2
+
+
+class Debugger:
+    """Context for running interactive debug sessions."""
+
+    state = False
+
+    @classmethod
+    def launch(cls) -> None:
+        """Launch interactive debug session if state is True."""
+
+        if cls.state:
+            typer.secho("Launching interactive debug session...")
+            pdb.set_trace()
+
+
+class Msg(enum.Enum):
+    """Colors for message types."""
+
+    EMPTY = typer.colors.YELLOW
+    ERROR = typer.colors.RED
+    SUCCESS = typer.colors.BRIGHT_GREEN
+
+
+@app.command()
+def list(key: str, file_path: pathlib.Path = FileArg) -> None:
+    """List all dictionary KEY values in FILE_PATH."""
+
+    Debugger.launch()
+
+    rows, _ = load_data(file_path)
     for idx, row in enumerate(rows):
         try:
-            print(row[args.key])
+            typer.echo(row[key])
         except KeyError:
-            print(f"error: row {idx} does not have key {args.key}")
+            typer.secho(f"error: row {idx} does not have key {key}", fg=Msg.ERROR.value)
+            typer.Exit(code=Code.ERROR.value)
             break
 
 
-def main() -> None:
-    """Command line entrypoint for YamlTable."""
+def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
+    """Attempt to load data from YAML file.
 
-    args = parse_args()
-    if args.debug:
-        pdb.runcall(worker, args)
-    else:
-        worker(args)
-
-
-def parse_args() -> argparse.Namespace:
-    """Parse command line arguments into organized namespace.
+    Args:
+        file_path: YAML file path
 
     Return:
-        organized namespace of command line arguments
-    """
-
-    parser = argparse.ArgumentParser(
-        description="utilities for working with list organized YAML files",
-        formatter_class=SubcommandHelpFormatter,
-    )
-    parser.add_argument("-d", "--debug", action="store_true", help="run yamltable in debug mode")
-    parser.add_argument("-v", "--version", action="version", version=yamltable.__version__)
-    subparser = parser.add_subparsers(
-        dest="command", title="commands", metavar="<command>", required=True
-    )
-
-    list_parser = subparser.add_parser(
-        name="list", description="list dictionary key values", help="list dictionary key values"
-    )
-    list_parser.add_argument("key", type=str, help="dictionary key")
-    list_parser.add_argument("file_path", type=str, help="YAML file location")
-    list_parser.set_defaults(func=list_)
-
-    search_parser = subparser.add_parser(
-        name="search",
-        description="search dictionaries by key and value",
-        help="search dictionaries by key and value",
-    )
-    search_parser.add_argument("key", type=str, help="dictionary key")
-    search_parser.add_argument("value", help="key value")
-    search_parser.add_argument("file_path", type=str, help="YAML file location")
-    search_parser.set_defaults(func=search)
-
-    sort_parser = subparser.add_parser(
-        name="sort",
-        description="sort dictionaries by key and value",
-        help="sort dictionaries by key and value",
-    )
-    sort_parser.add_argument("key", type=str, help="dictionary key")
-    sort_parser.add_argument("file_path", type=str, help="YAML file location")
-    sort_parser.set_defaults(func=sort)
-
-    validate_parser = subparser.add_parser(
-        name="validate", description="validate dictionaries", help="validate dictionaries"
-    )
-    validate_parser.add_argument("file_path", type=str, help="YAML file location")
-    validate_parser.set_defaults(func=validate)
-
-    return parser.parse_args()
-
-
-def search(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
-    """Search dictionaries for matching key and value.
-
-    Args:
-        args: command line arguments
-        rows: YAML file dictionaries
-        schema: JSON schema for YAML file
-    """
-
-    for match in yamltable.search(args.key, args.value, rows):
-        pprint.pprint(match, indent=2)
-
-
-def sort(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
-    """Sort dictionaries by key values.
-
-    Args:
-        args: command line arguments
-        rows: YAML file dictionaries
-        schema: JSON schema for YAML file
+        YAML row data, YAML schema
     """
 
     try:
-        sorted_rows = yamltable.sort(args.key, rows)
+        return yamltable.read(file_path)
+    except (FileNotFoundError, TypeError) as xcpt:
+        typer.secho(xcpt, fg=Msg.ERROR.value)
+        raise typer.Exit(code=Code.ERROR.value)
+
+
+@app.callback()
+def main(debug: bool = typer.Option(False, help="Run with interactive debug session.")) -> None:
+    """Utility for working with YAML files organized similar to a relational database table."""
+
+    Debugger.state = debug
+
+
+@app.command()
+def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
+    """Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
+
+    Debugger.launch()
+
+    rows, _ = load_data(file_path)
+
+    count = 0
+    for match in yamltable.search(key, value, rows):
+        count += 1
+        typer.echo(pprint.pformat(match, indent=2))
+
+    if count == 0:
+        typer.secho(
+            f"no dictionaries found with (key={key}, value={value}) pair", fg=Msg.EMPTY.value
+        )
+
+
+@app.command()
+def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
+    """Sort dictionaries in FILE_PATH by KEY values."""
+
+    Debugger.launch()
+
+    rows, schema = load_data(file_path)
+    try:
+        sorted_rows = yamltable.sort(key, rows)
     except TypeError as xcpt:
-        print(f"error: {xcpt}")
+        typer.secho(f"error: {xcpt}", fg=Msg.ERROR.value)
+        typer.Exit(code=Code.ERROR.value)
     else:
-        yamltable.write(args.file_path, sorted_rows, schema)
+        yamltable.write(file_path, sorted_rows, schema)
 
 
-def validate(args: argparse.Namespace, rows: List[Row], schema: Optional[Schema] = None) -> None:
-    """Check that every dictionary has valid format.
+@app.command()
+def validate(file_path: pathlib.Path = FileArg) -> None:
+    """Check that every dictionary in FILE_PATH has conforms to its schema."""
 
-    Args:
-        args: command line arguments
-        rows: YAML file dictionaries
-        schema: JSON schema for YAML file
-    """
+    Debugger.launch()
 
+    rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
     if valid:
-        print("YAML file rows conform to its schema")
+        typer.secho("YAML file rows conform to its schema", fg=Msg.SUCCESS.value)
     elif row == -1:
-        print(f"invalid schema: {msg}")
+        typer.secho(f"invalid schema: {msg}", fg=Msg.ERROR.value)
+        typer.Exit(code=Code.ERROR.value)
     else:
-        print(f"invalid row {row}: {msg}")
-
-
-def worker(args: argparse.Namespace) -> None:
-    """Execute yamltable functionality
-
-    Args:
-        args: command line arguments
-    """
-
-    try:
-        rows, schema = yamltable.read(args.file_path)
-    except (FileNotFoundError, TypeError) as xcpt:
-        print(xcpt)
-    else:
-        args.func(args, rows, schema)
+        typer.secho(f"invalid row {row}: {msg}", fg=Msg.ERROR.value)
+        typer.Exit(code=Code.INVALID.value)
 
 
 if __name__ == "__main__":
-    main()
+    app()

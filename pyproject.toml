@@ -30,26 +30,27 @@ keywords = ["yaml"]
 license = "MIT"
 name = "yamltable"
 readme = "readme.md"
-version = "0.0.4"
+version = "0.0.5"
 
 [tool.poetry.dependencies]
 fastjsonschema = "^2.14.2"
 python = "^3.7"
 pyyaml = "^5.2"
+typer = "^0.0.8"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
 coverage = { version = "^5.0.1", extras = ["toml"] }
 flake8 = "^3.7.9"
-isort = "^4.3.21"
 mypy = "^0.761"
 pre-commit = "^1.21.0"
 pytest = "^5.2"
 pytest-cov = "^2.8.1"
+pytest-mock = "^2.0.0"
 sphinx = "^2.3.1"
 sphinx_rtd_theme = "^0.4.3"
-tox = "^3.14.3"
 toml = "^0.10.0"
+tox = "^3.14.3"
 
 [tool.poetry.scripts]
-yamltable = "yamltable.main:main"
+yamltable = "yamltable.main:app"
