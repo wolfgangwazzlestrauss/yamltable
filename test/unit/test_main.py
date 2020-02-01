@@ -2,14 +2,17 @@
 
 
 import pathlib
+import pprint
 
-import pytest
 import toml
+from typer import testing
+
 import yamltable
+from yamltable import main
 
 
-def test_version() -> None:
-    """Check that the two version tags are in sync."""
+def test_yamltable_version() -> None:
+    """Check that all the version tags are in sync."""
 
     pyproject_path = pathlib.Path(yamltable.__file__).parents[2] / "pyproject.toml"
     expected = toml.load(pyproject_path)["tool"]["poetry"]["version"]
@@ -18,5 +21,23 @@ def test_version() -> None:
     assert actual == expected
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_search() -> None:
+    """Command line test for search option."""
+
+    runner = testing.CliRunner()
+    resp = runner.invoke(main.app, ["search", "name", "repo", "test/data/path.yaml"])
+
+    expected = pprint.pformat(
+        {
+            "name": "repo",
+            "dest": "$HOME/repo",
+            "description": "GitHub repository directory",
+            "type": "directory",
+            "source": None,
+        },
+        indent=2,
+    )
+    actual = resp.stdout.strip()
+
+    assert resp.exit_code == 0
+    assert actual == expected

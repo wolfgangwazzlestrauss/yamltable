@@ -1,7 +1,6 @@
 """Command line interface for YamlTable."""
 
 
-import bdb
 import enum
 import pathlib
 import pdb
@@ -9,8 +8,13 @@ import pprint
 from typing import List, Optional, Tuple
 
 import typer
+
 import yamltable
 from yamltable.typing import Row, Schema
+
+
+FileArg = typer.Argument(..., dir_okay=False, exists=True, file_okay=True, resolve_path=True)
+
 
 app = typer.Typer()
 
@@ -46,7 +50,7 @@ class Msg(enum.Enum):
 
 
 @app.command()
-def list(key: str, file_path: pathlib.Path) -> None:
+def list(key: str, file_path: pathlib.Path = FileArg) -> None:
     """List all dictionary KEY values in FILE_PATH."""
 
     Debugger.launch()
@@ -86,7 +90,7 @@ def main(debug: bool = typer.Option(False, help="Run with interactive debug sess
 
 
 @app.command()
-def search(key: str, value: str, file_path: pathlib.Path) -> None:
+def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
     """Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
 
     Debugger.launch()
@@ -105,7 +109,7 @@ def search(key: str, value: str, file_path: pathlib.Path) -> None:
 
 
 @app.command()
-def sort(key: str, file_path: pathlib.Path) -> None:
+def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
     """Sort dictionaries in FILE_PATH by KEY values."""
 
     Debugger.launch()
@@ -121,7 +125,7 @@ def sort(key: str, file_path: pathlib.Path) -> None:
 
 
 @app.command()
-def validate(file_path: pathlib.Path) -> None:
+def validate(file_path: pathlib.Path = FileArg) -> None:
     """Check that every dictionary in FILE_PATH has conforms to its schema."""
 
     Debugger.launch()
@@ -139,7 +143,4 @@ def validate(file_path: pathlib.Path) -> None:
 
 
 if __name__ == "__main__":
-    try:
-        app()
-    except bdb.BdbQuit:
-        print("looks like you are quitting")
+    app()
