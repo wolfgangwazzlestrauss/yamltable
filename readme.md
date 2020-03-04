@@ -1,9 +1,11 @@
 # YamlTable 
 
 ![](https://img.shields.io/pypi/v/yamltable)
-![](https://img.shields.io/github/license/wolfgangwazzlestrauss/yamltable)
+![]( https://img.shields.io/pypi/pyversions/yamltable.svg)
 ![](https://github.com/wolfgangwazzlestrauss/yamltable/workflows/build/badge.svg)
+![](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![](https://img.shields.io/github/repo-size/wolfgangwazzlestrauss/yamltable)
+![](https://img.shields.io/github/license/wolfgangwazzlestrauss/yamltable)
 
 YamlTable is a Python command line utility for working with YAML files organized similar to a
 relational database table. It supports YAML files organized as a list of dictionaries, which share
@@ -56,7 +58,7 @@ rows:
 
 ### Installation
 
-YamlTable can be installed for Python 3.7+ with `pipx`.
+YamlTable can be installed for Python 3.6+ with `pipx`.
 ```bash
 pipx install yamltable
 ```
