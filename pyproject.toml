@@ -30,7 +30,7 @@ keywords = ["yaml"]
 license = "MIT"
 name = "yamltable"
 readme = "readme.md"
-version = "0.0.5"
+version = "0.0.6"
 
 [tool.poetry.dependencies]
 fastjsonschema = "^2.14.2"
