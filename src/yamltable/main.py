@@ -78,7 +78,7 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     try:
         return yamltable.read(file_path)
     except (FileNotFoundError, TypeError) as xcpt:
-        typer.secho(xcpt, fg=Msg.ERROR.value)
+        typer.secho(str(xcpt), fg=Msg.ERROR.value)
         raise typer.Exit(code=Code.ERROR.value)
 
 
