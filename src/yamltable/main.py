@@ -49,8 +49,20 @@ class Msg(enum.Enum):
     SUCCESS = typer.colors.BRIGHT_GREEN
 
 
-@app.command()
-def list(key: str, file_path: pathlib.Path = FileArg) -> None:
+@app.command(name="index")
+def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
+    """Get row at INDEX in FILE_PATH."""
+
+    rows, _ = load_data(file_path)
+    try:
+        typer.echo(rows[index])
+    except IndexError:
+        typer.secho(f"error: {index} is out of bounds", fg=Msg.ERROR.value)
+        typer.Exit(code=Code.ERROR.value)
+
+
+@app.command(name="list")
+def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
     """List all dictionary KEY values in FILE_PATH."""
 
     Debugger.launch()
