@@ -29,7 +29,7 @@ homepage = "https://github.com/wolfgangwazzlestrauss/yamltable"
 keywords = ["yaml"]
 license = "MIT"
 name = "yamltable"
-readme = "readme.md"
+readme = "README.md"
 version = "0.0.6"
 
 [tool.poetry.dependencies]

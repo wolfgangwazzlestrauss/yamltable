@@ -9,7 +9,7 @@
 **/.ipynb_checkpoints/*
 **/*.egg-info/*
 dist/*
-doc/build/*
+docs/build/*
 poetry.lock
 *.pyc
 
