@@ -36,7 +36,7 @@ version = "0.0.6"
 fastjsonschema = "^2.14.2"
 python = "^3.6"
 pyyaml = "^5.2"
-typer = "^0.0.8"
+typer = "^0.0.10"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"

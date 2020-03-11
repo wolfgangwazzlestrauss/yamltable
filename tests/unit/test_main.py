@@ -24,11 +24,8 @@ def test_yamltable_version() -> None:
 def test_search() -> None:
     """Command line test for search option."""
 
-    repo_path = pathlib.Path(yamltable.__file__).parents[2]
-    data_path = str(repo_path / "tests/data/path.yaml")
-
     runner = testing.CliRunner()
-    resp = runner.invoke(main.app, ["search", "name", "repo", data_path])
+    resp = runner.invoke(main.app, ["search", "name", "repo", "tests/data/path.yaml"])
 
     expected = pprint.pformat(
         {
