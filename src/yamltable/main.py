@@ -3,7 +3,6 @@
 
 import enum
 import pathlib
-import pdb
 import pprint
 from typing import List, Optional, Tuple
 
@@ -16,7 +15,9 @@ from yamltable.typing import Row, Schema
 FileArg = typer.Argument(..., dir_okay=False, exists=True, file_okay=True, resolve_path=True)
 
 
-app = typer.Typer()
+app = typer.Typer(
+    help="Utility for working with YAML files organized similar to a relational database table."
+)
 
 
 class Code(enum.Enum):
@@ -25,20 +26,6 @@ class Code(enum.Enum):
     SUCCESS = 0
     INVALID = 1
     ERROR = 2
-
-
-class Debugger:
-    """Context for running interactive debug sessions."""
-
-    state = False
-
-    @classmethod
-    def launch(cls) -> None:
-        """Launch interactive debug session if state is True."""
-
-        if cls.state:
-            typer.secho("Launching interactive debug session...")
-            pdb.set_trace()
 
 
 class Msg(enum.Enum):
@@ -64,8 +51,6 @@ def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
 @app.command(name="list")
 def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
     """List all dictionary KEY values in FILE_PATH."""
-
-    Debugger.launch()
 
     rows, _ = load_data(file_path)
     for idx, row in enumerate(rows):
@@ -94,18 +79,9 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
         raise typer.Exit(code=Code.ERROR.value)
 
 
-@app.callback()
-def main(debug: bool = typer.Option(False, help="Run with interactive debug session.")) -> None:
-    """Utility for working with YAML files organized similar to a relational database table."""
-
-    Debugger.state = debug
-
-
 @app.command()
 def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
     """Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
-
-    Debugger.launch()
 
     rows, _ = load_data(file_path)
 
@@ -124,8 +100,6 @@ def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
 def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
     """Sort dictionaries in FILE_PATH by KEY values."""
 
-    Debugger.launch()
-
     rows, schema = load_data(file_path)
     try:
         sorted_rows = yamltable.sort(key, rows)
@@ -139,8 +113,6 @@ def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
 @app.command()
 def validate(file_path: pathlib.Path = FileArg) -> None:
     """Check that every dictionary in FILE_PATH has conforms to its schema."""
-
-    Debugger.launch()
 
     rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
