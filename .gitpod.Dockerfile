@@ -1,10 +1,6 @@
 FROM gitpod/workspace-full
 
-
-# Install additional tools.
-RUN RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq \
-    curl \
-    lldb
+ENV PATH /workspace/yamltable/.local/bin:${PATH}
 
 # Install multiple Python versions.
 RUN pyenv install 3.7.5 \
@@ -12,7 +8,4 @@ RUN pyenv install 3.7.5 \
     && pyenv global 3.8.1
 
 # Install Python packages.
-RUN python -m pip install poetry
-
-# Install virtual environment.
-RUN poetry install -v
+RUN python -m pip install --upgrade pip
