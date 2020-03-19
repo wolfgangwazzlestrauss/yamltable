@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>yamltable package &#8212; YamlTable 0.0.7 documentation</title>
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="yamltable" href="modules.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="yamltable"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">YamlTable 0.0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">yamltable</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="yamltable-package">
+<h1>yamltable package<a class="headerlink" href="#yamltable-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-yamltable.lib">
+<span id="yamltable-lib-module"></span><h2>yamltable.lib module<a class="headerlink" href="#module-yamltable.lib" title="Permalink to this headline">¶</a></h2>
+<p>Library functions for YamlTable.</p>
+<dl class="function">
+<dt id="yamltable.lib.read">
+<code class="sig-prename descclassname">yamltable.lib.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path</em><span class="sig-paren">)</span> &#x2192; Tuple[List[Dict[str, Any]], Optional[Dict[str, Any]]]<a class="headerlink" href="#yamltable.lib.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_path</strong> – YAML file path</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – if unable to find file path</p></li>
+<li><p><strong>TypeError</strong> – if file is not organized as a list</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>YAML data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.lib.search">
+<code class="sig-prename descclassname">yamltable.lib.</code><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">key: str, val: Any, rows: Iterable[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; List[Dict[str, Any]]<a class="headerlink" href="#yamltable.lib.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search dictionaries by key and value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – search key</p></li>
+<li><p><strong>val</strong> – key comparison value</p></li>
+<li><p><strong>rows</strong> – dictionaries to search</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>matching dictionaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.lib.sort">
+<code class="sig-prename descclassname">yamltable.lib.</code><code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param">key: str, rows: Iterable[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; List[Dict[str, Any]]<a class="headerlink" href="#yamltable.lib.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort dictionaries based on value for supplied key name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – search key</p></li>
+<li><p><strong>rows</strong> – dictionaries to sort</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of sorted dictionaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.lib.validate">
+<code class="sig-prename descclassname">yamltable.lib.</code><code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">rows: Iterable[Dict[str, Any]], schema: Optional[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; Tuple[bool, int, str]<a class="headerlink" href="#yamltable.lib.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that each row satisfies the schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> – dictionaries to validate</p></li>
+<li><p><strong>schema</strong> – JSON schema for validation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether all rows are valid, invalid row index or -1, invalid error message</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.lib.write">
+<code class="sig-prename descclassname">yamltable.lib.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path, rows: List[Dict[str, Any]], schema: Optional[Dict[str, Any]] = None, sort_keys: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.lib.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – YAML file path</p></li>
+<li><p><strong>rows</strong> – list of dictionaries to write</p></li>
+<li><p><strong>schema</strong> – JSON schema dictionary</p></li>
+<li><p><strong>sort_keys</strong> – whether to sort row keys</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-yamltable.main">
+<span id="yamltable-main-module"></span><h2>yamltable.main module<a class="headerlink" href="#module-yamltable.main" title="Permalink to this headline">¶</a></h2>
+<p>Command line interface for YamlTable.</p>
+<dl class="class">
+<dt id="yamltable.main.Code">
+<em class="property">class </em><code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">Code</code><a class="headerlink" href="#yamltable.main.Code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Exit code statuses.</p>
+<dl class="attribute">
+<dt id="yamltable.main.Code.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 2</em><a class="headerlink" href="#yamltable.main.Code.ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yamltable.main.Code.INVALID">
+<code class="sig-name descname">INVALID</code><em class="property"> = 1</em><a class="headerlink" href="#yamltable.main.Code.INVALID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yamltable.main.Code.SUCCESS">
+<code class="sig-name descname">SUCCESS</code><em class="property"> = 0</em><a class="headerlink" href="#yamltable.main.Code.SUCCESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="yamltable.main.Msg">
+<em class="property">class </em><code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">Msg</code><a class="headerlink" href="#yamltable.main.Msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Colors for message types.</p>
+<dl class="attribute">
+<dt id="yamltable.main.Msg.EMPTY">
+<code class="sig-name descname">EMPTY</code><em class="property"> = 'yellow'</em><a class="headerlink" href="#yamltable.main.Msg.EMPTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yamltable.main.Msg.ERROR">
+<code class="sig-name descname">ERROR</code><em class="property"> = 'red'</em><a class="headerlink" href="#yamltable.main.Msg.ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yamltable.main.Msg.SUCCESS">
+<code class="sig-name descname">SUCCESS</code><em class="property"> = 'bright_green'</em><a class="headerlink" href="#yamltable.main.Msg.SUCCESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.index_">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">index_</code><span class="sig-paren">(</span><em class="sig-param">index: int</em>, <em class="sig-param">file_path: pathlib.Path = &lt;typer.models.ArgumentInfo object&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.main.index_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get row at INDEX in FILE_PATH.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.list_">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">list_</code><span class="sig-paren">(</span><em class="sig-param">key: str</em>, <em class="sig-param">file_path: pathlib.Path = &lt;typer.models.ArgumentInfo object&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.main.list_" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all dictionary KEY values in FILE_PATH.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.load_data">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">load_data</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path</em><span class="sig-paren">)</span> &#x2192; Tuple[List[Dict[str, Any]], Optional[Dict[str, Any]]]<a class="headerlink" href="#yamltable.main.load_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to load data from YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_path</strong> – YAML file path</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>YAML row data, YAML schema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.search">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">key: str</em>, <em class="sig-param">value: str</em>, <em class="sig-param">file_path: pathlib.Path = &lt;typer.models.ArgumentInfo object&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.main.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.sort">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param">key: str</em>, <em class="sig-param">file_path: pathlib.Path = &lt;typer.models.ArgumentInfo object&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.main.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort dictionaries in FILE_PATH by KEY values.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.main.validate">
+<code class="sig-prename descclassname">yamltable.main.</code><code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path = &lt;typer.models.ArgumentInfo object&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.main.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that every dictionary in FILE_PATH has conforms to its schema.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-yamltable.typing">
+<span id="yamltable-typing-module"></span><h2>yamltable.typing module<a class="headerlink" href="#module-yamltable.typing" title="Permalink to this headline">¶</a></h2>
+<p>Library types for YamlTable.</p>
+</div>
+<div class="section" id="module-yamltable">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-yamltable" title="Permalink to this headline">¶</a></h2>
+<p>Command line interface for sorting YAML files.</p>
+<dl class="function">
+<dt id="yamltable.read">
+<code class="sig-prename descclassname">yamltable.</code><code class="sig-name descname">read</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path</em><span class="sig-paren">)</span> &#x2192; Tuple[List[Dict[str, Any]], Optional[Dict[str, Any]]]<a class="headerlink" href="#yamltable.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read data from YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_path</strong> – YAML file path</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – if unable to find file path</p></li>
+<li><p><strong>TypeError</strong> – if file is not organized as a list</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>YAML data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.search">
+<code class="sig-prename descclassname">yamltable.</code><code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">key: str, val: Any, rows: Iterable[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; List[Dict[str, Any]]<a class="headerlink" href="#yamltable.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search dictionaries by key and value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – search key</p></li>
+<li><p><strong>val</strong> – key comparison value</p></li>
+<li><p><strong>rows</strong> – dictionaries to search</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>matching dictionaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.sort">
+<code class="sig-prename descclassname">yamltable.</code><code class="sig-name descname">sort</code><span class="sig-paren">(</span><em class="sig-param">key: str, rows: Iterable[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; List[Dict[str, Any]]<a class="headerlink" href="#yamltable.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort dictionaries based on value for supplied key name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> – search key</p></li>
+<li><p><strong>rows</strong> – dictionaries to sort</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of sorted dictionaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.validate">
+<code class="sig-prename descclassname">yamltable.</code><code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">rows: Iterable[Dict[str, Any]], schema: Optional[Dict[str, Any]]</em><span class="sig-paren">)</span> &#x2192; Tuple[bool, int, str]<a class="headerlink" href="#yamltable.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that each row satisfies the schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> – dictionaries to validate</p></li>
+<li><p><strong>schema</strong> – JSON schema for validation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether all rows are valid, invalid row index or -1, invalid error message</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="yamltable.write">
+<code class="sig-prename descclassname">yamltable.</code><code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">file_path: pathlib.Path, rows: List[Dict[str, Any]], schema: Optional[Dict[str, Any]] = None, sort_keys: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#yamltable.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to YAML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – YAML file path</p></li>
+<li><p><strong>rows</strong> – list of dictionaries to write</p></li>
+<li><p><strong>schema</strong> – JSON schema dictionary</p></li>
+<li><p><strong>sort_keys</strong> – whether to sort row keys</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">yamltable package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-yamltable.lib">yamltable.lib module</a></li>
+<li><a class="reference internal" href="#module-yamltable.main">yamltable.main module</a></li>
+<li><a class="reference internal" href="#module-yamltable.typing">yamltable.typing module</a></li>
+<li><a class="reference internal" href="#module-yamltable">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">yamltable</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/yamltable.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="yamltable"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">YamlTable 0.0.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >yamltable</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Macklan Weinstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  </body>
+</html>
