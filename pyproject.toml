@@ -35,6 +35,7 @@ typer = "^0.0.11"
 black = "^19.10b0"
 coverage = { version = "^5.0.1", extras = ["toml"] }
 flake8 = "^3.7.9"
+ghp-import = "^0.5.5"
 mypy = "^0.761"
 pre-commit = "^1.21.0"
 pytest = "^5.2"
