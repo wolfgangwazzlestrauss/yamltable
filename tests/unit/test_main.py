@@ -31,7 +31,9 @@ def test_search() -> None:
     """Command line test for search option."""
 
     runner = testing.CliRunner()
-    resp = runner.invoke(main.app, ["search", "name", "repo", "tests/data/path.yaml"])
+    resp = runner.invoke(
+        main.app, ["search", "name", "repo", "tests/data/path.yaml"]
+    )
 
     expected = pprint.pformat(
         {

@@ -35,7 +35,9 @@ def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
         try:
             return data["rows"], data["schema"]
         except KeyError:
-            raise TypeError("YAML file does not have a schema and rows organization")
+            raise TypeError(
+                "YAML file does not have a schema and rows organization"
+            )
     else:
         raise TypeError("YAML file is not organized in a tabular format")
 
@@ -69,7 +71,9 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     return sorted(rows, key=lambda row: row[key])
 
 
-def validate(rows: Iterable[Row], schema: Optional[Schema]) -> Tuple[bool, int, str]:
+def validate(
+    rows: Iterable[Row], schema: Optional[Schema]
+) -> Tuple[bool, int, str]:
     """Check that each row satisfies the schema.
 
     Args:

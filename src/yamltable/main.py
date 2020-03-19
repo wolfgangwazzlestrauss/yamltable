@@ -12,7 +12,9 @@ import yamltable
 from yamltable.typing import Row, Schema
 
 
-FileArg = typer.Argument(..., dir_okay=False, exists=True, file_okay=True, resolve_path=True)
+FileArg = typer.Argument(
+    ..., dir_okay=False, exists=True, file_okay=True, resolve_path=True
+)
 
 
 app = typer.Typer(
@@ -57,7 +59,9 @@ def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
         try:
             typer.echo(row[key])
         except KeyError:
-            typer.secho(f"error: row {idx} does not have key {key}", fg=Msg.ERROR.value)
+            typer.secho(
+                f"error: row {idx} does not have key {key}", fg=Msg.ERROR.value
+            )
             typer.Exit(code=Code.ERROR.value)
             break
 
@@ -92,7 +96,8 @@ def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
 
     if count == 0:
         typer.secho(
-            f"no dictionaries found with (key={key}, value={value}) pair", fg=Msg.EMPTY.value
+            f"no dictionaries found with (key={key}, value={value}) pair",
+            fg=Msg.EMPTY.value,
         )
 
 
@@ -117,7 +122,9 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
     rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
     if valid:
-        typer.secho("YAML file rows conform to its schema", fg=Msg.SUCCESS.value)
+        typer.secho(
+            "YAML file rows conform to its schema", fg=Msg.SUCCESS.value
+        )
     elif row == -1:
         typer.secho(f"invalid schema: {msg}", fg=Msg.ERROR.value)
         typer.Exit(code=Code.ERROR.value)
