@@ -7,10 +7,11 @@
 ![](https://img.shields.io/github/repo-size/wolfgangwazzlestrauss/yamltable)
 ![](https://img.shields.io/github/license/wolfgangwazzlestrauss/yamltable)
 
-YamlTable is a Python command line utility for working with YAML files organized
-similar to a relational database table. It supports YAML files organized as a
-list of dictionaries, which share key names and value types. YamlTable provides
-commands for listing, searching, sorting, etc. data from the supported files.
+[YamlTable](https://wolfgangwazzlestrauss.github.io/yamltable) is a Python
+command line utility for working with YAML files organized similar to a
+relational database table. It supports YAML files organized as a list of
+dictionaries, which share key names and value types. YamlTable provides commands
+for listing, searching, sorting, etc. data from the supported files.
 
 ## Supported YAML File Organizations
 
