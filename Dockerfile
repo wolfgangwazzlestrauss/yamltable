@@ -80,10 +80,10 @@ RUN curl -LSs https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-inst
     && { echo; \
         echo 'eval "$(pyenv init -)"'; \
         echo 'eval "$(pyenv virtualenv-init -)"'; } >> .bashrc \
-    && pyenv install 3.6.9 \
-    && pyenv install 3.7.6 \
-    && pyenv install 3.8.1 \
-    && pyenv global 3.8.1 \
+    && pyenv install 3.6.10 \
+    && pyenv install 3.7.7 \
+    && pyenv install 3.8.2 \
+    && pyenv global 3.6.10 \
     && python -m pip install --upgrade pip \
     && python -m pip install --user poetry \
     && rm -rf /tmp/*

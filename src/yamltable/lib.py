@@ -77,11 +77,12 @@ def validate(
     """Check that each row satisfies the schema.
 
     Args:
-        rows: dictionaries to validate
-        schema: JSON schema for validation
+        rows: Dictionaries to validate.
+        schema: JSON schema for validation.
 
     Return:
-        whether all rows are valid, invalid row index or -1, invalid error message
+        Whether all rows are valid, invalid row index or -1,
+        invalid error message.
     """
 
     try:

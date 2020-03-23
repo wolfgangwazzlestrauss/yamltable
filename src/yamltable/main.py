@@ -18,7 +18,10 @@ FileArg = typer.Argument(
 
 
 app = typer.Typer(
-    help="Utility for working with YAML files organized similar to a relational database table."
+    help=(
+        "Utility for working with YAML files organized similar to a relational"
+        " database table."
+    )
 )
 
 
@@ -85,7 +88,7 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
 
 @app.command()
 def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
-    """Search for all dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
+    """Search dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
 
     rows, _ = load_data(file_path)
 
