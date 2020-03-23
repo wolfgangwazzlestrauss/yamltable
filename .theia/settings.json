@@ -6,7 +6,6 @@
   "editor.parameterHints.enabled": true,
   "editor.rulers": [80],
   "editor.tabSize": 4,
-  "files.insertFinalNewline": true,
   "python.pythonPath": ".venv/bin/python",
   "python.terminal.activateEnvironment": true,
   "python.linting.flake8Enabled": true,
