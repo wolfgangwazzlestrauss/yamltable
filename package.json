@@ -2,10 +2,6 @@
   "name": "yamltable",
   "version": "0.0.1",
   "description": "CLI for working with YAML files organized similar to a relational database table.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}"
   },
@@ -15,9 +11,6 @@
   },
   "author": "Macklan Weinstein",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wolfgangwazzlestrauss/yamltable/issues"
-  },
   "homepage": "https://github.com/wolfgangwazzlestrauss/yamltable#readme",
   "devDependencies": {
     "prettier": "^1.19.1"
