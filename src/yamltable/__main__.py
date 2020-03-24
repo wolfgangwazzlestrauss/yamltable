@@ -79,7 +79,7 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     Args:
         file_path: YAML file path
 
-    Return:
+    Returns:
         YAML row data, YAML schema
     """
 

@@ -19,7 +19,7 @@ def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
         FileNotFoundError: if unable to find file path
         TypeError: if file is not organized as a list
 
-    Return:
+    Returns:
         YAML data
     """
 
@@ -50,7 +50,7 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
         val: key comparison value
         rows: dictionaries to search
 
-    Return:
+    Returns:
         matching dictionaries
     """
 
@@ -64,7 +64,7 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
         key: search key
         rows: dictionaries to sort
 
-    Return:
+    Returns:
         list of sorted dictionaries
     """
 
@@ -80,7 +80,7 @@ def validate(
         rows: Dictionaries to validate.
         schema: JSON schema for validation.
 
-    Return:
+    Returns:
         Whether all rows are valid, invalid row index or -1,
         invalid error message.
     """
