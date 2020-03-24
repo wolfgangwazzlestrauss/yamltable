@@ -8,7 +8,7 @@ import toml
 from typer import testing
 
 import yamltable
-from yamltable import main
+import yamltable.__main__ as main
 
 
 def test_yamltable_version() -> None:
