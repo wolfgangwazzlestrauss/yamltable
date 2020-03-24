@@ -1,4 +1,8 @@
-"""Command line interface for YamlTable."""
+"""Command line interface for YamlTable.
+
+See https://docs.python.org/3/using/cmdline.html#cmdoption-m for why module is
+named __main__.py.
+"""
 
 
 import enum
