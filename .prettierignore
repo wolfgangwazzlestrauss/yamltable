@@ -1,14 +1,9 @@
-.coverage
-.DS_Store
+.git/*
 .mypy_cache/*
 .pytest_cache/*
 .tox/*
 .venv/*
-*.pyc
-**/__pycache__/*
-**/.ipynb_checkpoints/*
-**/*.egg-info/*
-dist/*
+*.min.js
 node_modules/*
 package-lock.json
 poetry.lock

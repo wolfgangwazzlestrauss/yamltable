@@ -1,0 +1,59 @@
+copyright: Copyright &copy; 2019 Macklan Weinstein
+extra:
+  social:
+    - type: home
+      link: https://wolfgangwazzlestrauss.com
+    - type: github
+      link: https://github.com/wolfgangwazzlestrauss
+    - type: inbox
+      link: mailto://wolfgangwazzlestrauss@gmail.com
+extra_css:
+  - css/termynal.css
+extra_javascript:
+  - js/mermaid.min.js
+  - js/termynal.js
+  - js/index.js
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - footnotes
+  - meta
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Reference: reference.md
+plugins:
+  - mkdocstrings
+  - search
+repo_name: yamltable
+repo_url: https://github.com/wolfgangwazzlestrauss/yamltable
+site_author: Macklan Weinstein
+site_description: |
+  CLI for working with YAML files files organized similar to a
+  relational database table.
+site_name: YamlTable
+site_url: https://wolfgangwazzlestrauss.github.io/yamltable/index
+theme:
+  favicon: img/favicon.ico
+  logo: img/favicon.ico
+  name: material
+  palette:
+    accent: cyan
+    primary: teal
