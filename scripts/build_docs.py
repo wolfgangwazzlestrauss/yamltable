@@ -37,7 +37,7 @@ def generate_cli_docs(repo_path: pathlib.Path) -> None:
         repo_path: Repository root path.
     """
 
-    cli_doc = repo_path / "docs/cli.md"
+    cli_doc = repo_path / "docs/src/cli/index.md"
 
     with cli_doc.open("w") as handle:
         try:

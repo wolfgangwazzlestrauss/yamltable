@@ -29,7 +29,7 @@ def main() -> None:
     """Entrypoint for pyproject.toml file sorting."""
 
     repo_path = pathlib.Path(__file__).parents[1]
-    file_path = repo_path / "foobar.toml"
+    file_path = repo_path / "pyproject.toml"
 
     with file_path.open("r") as handle:
         unsorted_dict = toml.load(handle)
