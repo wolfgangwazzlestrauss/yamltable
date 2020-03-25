@@ -38,8 +38,10 @@ markdown_extensions:
       permalink: true
 nav:
   - Home: index.md
-  - CLI: cli.md
-  - Reference: reference.md
+  - Command Line: src/cli/index.md
+  - User Guide: src/user/index.md
+  - API Reference: src/reference/index.md
+  - Developer Guide: src/developer/index.md
 plugins:
   - mkdocstrings
   - search
