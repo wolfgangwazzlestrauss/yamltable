@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/</loc>
-     <lastmod>2020-03-24</lastmod>
+     <lastmod>2020-03-25</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/cli/</loc>
-     <lastmod>2020-03-24</lastmod>
+     <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/src/cli/</loc>
+     <lastmod>2020-03-25</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/reference/</loc>
-     <lastmod>2020-03-24</lastmod>
+     <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/src/reference/</loc>
+     <lastmod>2020-03-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://wolfgangwazzlestrauss.github.io/yamltable/index/src/developer/</loc>
+     <lastmod>2020-03-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
