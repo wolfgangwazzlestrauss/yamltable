@@ -10,7 +10,7 @@ from yamltable.typing import Row, Schema
 
 
 __author__ = "Macklan Weinstein"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 
 
 def dependencies(unsorted: Sequence[Row], depends: str, name: str) -> List[Row]:

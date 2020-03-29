@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "CLI for working with YAML files organized similar to a relational database table.",
   "scripts": {
-    "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}"
+    "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
+    "test": "prettier --check **/*.{css,html,js,json,md,yaml,yml}"
   },
   "repository": {
     "type": "git",
