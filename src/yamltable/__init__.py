@@ -17,14 +17,14 @@ def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     """Read data from YAML file.
 
     Args:
-        file_path: YAML file path
+        file_path: YAML file path.
 
     Raises:
-        FileNotFoundError: if unable to find file path
-        TypeError: if file is not organized as a list
+        FileNotFoundError: If unable to find file path.
+        TypeError: If file is not organized as a list.
 
     Returns:
-        YAML data
+        YAML data.
     """
 
     try:
@@ -50,12 +50,12 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
     """Search dictionaries by key and value.
 
     Args:
-        key: search key
-        val: key comparison value
-        rows: dictionaries to search
+        key: Search key.
+        val: Key comparison value.
+        rows: Dictionaries to search.
 
     Returns:
-        matching dictionaries
+        Matching dictionaries.
     """
 
     return [row for row in rows if key in row and row[key] == val]
@@ -65,11 +65,11 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     """Sort dictionaries based on value for supplied key name.
 
     Args:
-        key: search key
-        rows: dictionaries to sort
+        key: Search key.
+        rows: Dictionaries to sort.
 
     Returns:
-        list of sorted dictionaries
+        List of sorted dictionaries.
     """
 
     return sorted(rows, key=lambda row: row[key])
@@ -82,8 +82,8 @@ def sort_dependencies(
 
     Args:
         rows: Rows to sort.
-        depends:
-        name:
+        depends: Dictionary key whose values are other dictionary dependencies.
+        name: Foreign key for dependencies.
 
     Raises:
         ValueError: If rows contain circular requirements.
@@ -127,7 +127,7 @@ def validate(
 
     Returns:
         Whether all rows are valid, invalid row index or -1,
-        invalid error message.
+            invalid error message.
     """
 
     try:
@@ -153,10 +153,10 @@ def write(
     """Write data to YAML file.
 
     Args:
-        file_path: YAML file path
-        rows: list of dictionaries to write
-        schema: JSON schema dictionary
-        sort_keys: whether to sort row keys
+        file_path: YAML file path.
+        rows: List of dictionaries to write.
+        schema: JSON schema dictionary.
+        sort_keys: Whether to sort row keys.
     """
 
     if schema is None:
