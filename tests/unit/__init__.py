@@ -69,7 +69,7 @@ def test_sort() -> None:
     assert actual == expected
 
 
-def test_sort_dependencies() -> None:
+def test_dependencies() -> None:
     """Check that dependencies are resolved."""
 
     dicts = [
@@ -82,11 +82,11 @@ def test_sort_dependencies() -> None:
         {"name": 1, "depends": [2]},
     ]
 
-    actual = yamltable.sort_dependencies(dicts, "depends", "name")
+    actual = yamltable.dependencies(dicts, "depends", "name")
     assert actual == expected
 
 
-def test_sort_dependencies_circular_error() -> None:
+def test_dependencies_circular_error() -> None:
     """Check that error is raised when a circular dependency is encountered."""
 
     dicts = [
@@ -95,7 +95,7 @@ def test_sort_dependencies_circular_error() -> None:
     ]
 
     with pytest.raises(ValueError):
-        yamltable.sort_dependencies(dicts, "depends", "name")
+        yamltable.dependencies(dicts, "depends", "name")
 
 
 def test_validate_bad_schema() -> None:
