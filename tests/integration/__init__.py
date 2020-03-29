@@ -3,7 +3,6 @@
 
 import pathlib
 
-import pytest
 import yamltable
 
 
@@ -41,7 +40,3 @@ def test_sort_list(tmp_path: pathlib.Path) -> None:
     expected = "- foo: 3\n  bar: 2\n- foo: 1\n  bar: 4\n"
     actual = yaml_file.read_text()
     assert actual == expected
-
-
-if __name__ == "__main__":
-    pytest.main()

@@ -69,6 +69,35 @@ def test_sort() -> None:
     assert actual == expected
 
 
+def test_sort_dependencies() -> None:
+    """Check that dependencies are resolved."""
+
+    dicts = [
+        {"name": 1, "depends": [2]},
+        {"name": 2, "depends": []},
+    ]
+
+    expected = [
+        {"name": 2, "depends": []},
+        {"name": 1, "depends": [2]},
+    ]
+
+    actual = yamltable.sort_dependencies(dicts, "depends", "name")
+    assert actual == expected
+
+
+def test_sort_dependencies_circular_error() -> None:
+    """Check that error is raised when a circular dependency is encountered."""
+
+    dicts = [
+        {"name": 1, "depends": [2]},
+        {"name": 2, "depends": [1]},
+    ]
+
+    with pytest.raises(ValueError):
+        yamltable.sort_dependencies(dicts, "depends", "name")
+
+
 def test_validate_bad_schema() -> None:
     """Check that validation works for unnested list of dictionaries."""
 
@@ -127,7 +156,3 @@ def test_validate_good_data(schema: Schema) -> None:
     expected = (True, -1, "")
     actual = yamltable.validate(dicts, schema)
     assert actual == expected
-
-
-if __name__ == "__main__":
-    pytest.main()

@@ -2,7 +2,7 @@
 
 
 import pathlib
-from typing import Any, Iterable, List, Optional, Tuple
+from typing import Any, Iterable, List, Optional, Sequence, Tuple
 
 import fastjsonschema
 import yaml
@@ -69,6 +69,47 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     """
 
     return sorted(rows, key=lambda row: row[key])
+
+
+def sort_dependencies(
+    unsorted: Sequence[Row], depends: str, name: str
+) -> List[Row]:
+    """Sort rows based on the dependencies found in key.
+
+    Args:
+        rows: Rows to sort.
+        depends:
+        name:
+
+    Raises:
+        ValueError: If rows contain circular requirements.
+
+    Returns:
+        Rows sorted by requirements.
+    """
+
+    sorted_: List[Row] = []
+    while unsorted:
+        # Find rows containing only dependencies in sorted_.
+        names = [pkg[name] for pkg in sorted_]
+        rows = [
+            (idx, pkg)
+            for idx, pkg in enumerate(unsorted)
+            if set(pkg[depends]).issubset(names)
+        ]
+
+        if rows:
+            idxs, pkgs = zip(*rows)
+            # Append found rows to sorted_ and remove them from unsorted.
+            sorted_ += pkgs
+            unsorted = [
+                elem for idx, elem in enumerate(unsorted) if idx not in idxs
+            ]
+        else:
+            # If no rows are found then there exist circular dependencies.
+            raise ValueError("encountered circular dependencies.")
+
+    return sorted_
 
 
 def validate(
