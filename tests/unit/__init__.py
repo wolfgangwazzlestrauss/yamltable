@@ -1,11 +1,9 @@
 """Unit test functions from the yamltable module."""
 
 
-import pathlib
 from typing import List
 
 import pytest
-import pytest_mock
 import yamltable
 from yamltable.typing import Row, Schema
 
@@ -14,12 +12,11 @@ from yamltable.typing import Row, Schema
     "file_data",
     ["false", "mock_key_1: 1\nmock_key_2: 5", "mock_key_1: 1\n- mock_key_2: 5"],
 )
-def test_read_bad_data(file_data: str, mocker: pytest_mock.MockFixture) -> None:
+def test_read_bad_data(file_data: str) -> None:
     """Check that reader throws an exception when reading invalid YAML file."""
 
-    mocker.patch("builtins.open", mocker.mock_open(read_data=file_data))
     with pytest.raises(TypeError):
-        yamltable.read(pathlib.Path("mock_file_path.yaml"))
+        yamltable.read(file_data)
 
 
 @pytest.mark.parametrize(
@@ -29,13 +26,10 @@ def test_read_bad_data(file_data: str, mocker: pytest_mock.MockFixture) -> None:
         ("schema:\n  type: object\nrows:\n- mock_key: 1", [{"mock_key": 1}]),
     ],
 )
-def test_read_good_data(
-    file_data: str, expected: List[Row], mocker: pytest_mock.MockFixture
-) -> None:
+def test_read_good_data(file_data: str, expected: List[Row]) -> None:
     """Check that reader correctly reads data that is a list."""
 
-    mocker.patch("builtins.open", mocker.mock_open(read_data=file_data))
-    actual, _ = yamltable.read(pathlib.Path("mock_file_path.yaml"))
+    actual, _ = yamltable.read(file_data)
 
     assert actual == expected
 

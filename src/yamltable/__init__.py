@@ -2,7 +2,7 @@
 
 
 import pathlib
-from typing import Any, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, IO, Iterable, List, Optional, Sequence, Tuple, Union
 
 import fastjsonschema
 import yaml
@@ -52,11 +52,13 @@ def dependencies(unsorted: Sequence[Row], depends: str, name: str) -> List[Row]:
     return sorted_
 
 
-def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
+def read(
+    stream: Union[IO[str], pathlib.Path, str]
+) -> Tuple[List[Row], Optional[Schema]]:
     """Read data from YAML file.
 
     Args:
-        file_path: YAML file path.
+        stream: YAML text, text I/O stream, or file path.
 
     Raises:
         FileNotFoundError: If unable to find file path.
@@ -66,9 +68,11 @@ def read(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
         YAML data.
     """
 
+    if isinstance(stream, pathlib.Path):
+        stream = stream.read_text()
+
     try:
-        with open(file_path, "r") as handle:
-            data = yaml.safe_load(handle)
+        data = yaml.safe_load(stream)
     except (yaml.scanner.ScannerError, yaml.parser.ParserError) as xcpt:
         raise TypeError(f"invalid YAML file: {xcpt}")
 
