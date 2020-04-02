@@ -6,6 +6,31 @@ import re
 import shutil
 from typing import Iterable, List
 
+import typer
+
+
+app = typer.Typer(help="Script for cleaing unversion files.")
+
+
+@app.command()
+def clean() -> None:
+    """Remove unversioned files from project."""
+
+    rules = ignore_rules()
+    paths = ignore_paths(rules)
+    remove_paths(paths)
+
+
+@app.command()
+def dry_run() -> None:
+    """Show files that would be removed during cleaning."""
+
+    rules = ignore_rules()
+    paths = ignore_paths(rules)
+
+    for path in paths:
+        typer.secho(str(path), fg=typer.colors.GREEN)
+
 
 def ignore_paths(rules: Iterable[str]) -> List[pathlib.Path]:
     """Convert ignore rules into file paths.
@@ -57,13 +82,5 @@ def remove_paths(paths: Iterable[pathlib.Path]) -> None:
             shutil.rmtree(path)
 
 
-def main() -> None:
-    """Entrypoint for path removal."""
-
-    rules = ignore_rules()
-    paths = ignore_paths(rules)
-    remove_paths(paths)
-
-
 if __name__ == "__main__":
-    main()
+    app()
