@@ -1,4 +1,4 @@
-"""Removes all top level Git ignored directories and files."""
+"""Script for cleaing unversion files."""
 
 
 import pathlib

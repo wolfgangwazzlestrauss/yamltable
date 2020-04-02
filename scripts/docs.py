@@ -1,10 +1,9 @@
-"""Copy index file and build documentation."""
+"""Script for building and serving documentation."""
 
 
 import pathlib
 import shutil
 import subprocess
-import sys
 
 import typer
 
@@ -35,7 +34,7 @@ def run(command: str, error_msg: str) -> None:
     try:
         subprocess.run(args=command, shell=True, check=True)
     except subprocess.CalledProcessError:
-        typer.secho(error_msg, fg=typer.colors.RED, err=True)
+        typer.secho(f"Error: {error_msg}", fg=typer.colors.RED, err=True)
         raise typer.Exit(1)
 
 
@@ -70,11 +69,12 @@ def cli_docs(repo_path: pathlib.Path) -> None:
                 stdout=handle,
             )
         except subprocess.CalledProcessError:
-            print(
-                "Failed to build command line interface documentation.",
-                sys.stderr,
+            typer.secho(
+                f"Error: Failed to build command line interface documentation.",
+                fg=typer.colors.RED,
+                err=True,
             )
-            sys.exit(1)
+            raise typer.Exit(1)
 
 
 @app.command()
