@@ -9,6 +9,7 @@
 **/.ipynb_checkpoints/*
 **/*.egg-info/*
 dist/*
+docs/index.md
 node_modules/*
 package-lock.json
 poetry.lock
