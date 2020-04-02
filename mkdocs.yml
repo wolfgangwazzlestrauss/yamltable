@@ -50,8 +50,6 @@ site_description: |
 site_name: YamlTable
 site_url: https://wolfgangwazzlestrauss.github.io/yamltable/index
 theme:
-  favicon: img/favicon.ico
-  logo: img/favicon.ico
   name: material
   palette:
     accent: cyan
