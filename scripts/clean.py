@@ -13,23 +13,21 @@ app = typer.Typer(help="Script for cleaing unversion files.")
 
 
 @app.command()
-def clean() -> None:
+def clean(
+    dry_run: bool = typer.Option(
+        False, help="Show paths that would be removed but do not clean."
+    )
+) -> None:
     """Remove unversioned files from project."""
 
     rules = ignore_rules()
     paths = ignore_paths(rules)
-    remove_paths(paths)
 
-
-@app.command()
-def dry_run() -> None:
-    """Show files that would be removed during cleaning."""
-
-    rules = ignore_rules()
-    paths = ignore_paths(rules)
-
-    for path in paths:
-        typer.secho(str(path), fg=typer.colors.GREEN)
+    if dry_run:
+        for path in paths:
+            typer.secho(str(path), fg=typer.colors.GREEN)
+    else:
+        remove_paths(paths)
 
 
 def ignore_paths(rules: Iterable[str]) -> List[pathlib.Path]:

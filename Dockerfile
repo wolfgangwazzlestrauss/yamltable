@@ -20,7 +20,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #     -q: Quiet for logging.
 #     -y: Automatically answer yest to all prompts.
 RUN apt-get update -m \
-    && apt-get install -qy \
+    && apt-get install --no-install-recommends -qy \
         apt-utils \
         bash-completion \
         build-essential \
