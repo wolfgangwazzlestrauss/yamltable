@@ -3,6 +3,7 @@
 ![](https://img.shields.io/pypi/v/yamltable)
 ![](https://img.shields.io/pypi/pyversions/yamltable.svg)
 ![](https://github.com/wolfgangwazzlestrauss/yamltable/workflows/build/badge.svg)
+![](https://codecov.io/gh/wolfgangwazzlestrauss/yamltable/branch/master/graph/badge.svg)
 ![](https://img.shields.io/badge/code%20style-black-000000.svg)
 ![](https://img.shields.io/github/repo-size/wolfgangwazzlestrauss/yamltable)
 ![](https://img.shields.io/github/license/wolfgangwazzlestrauss/yamltable)
