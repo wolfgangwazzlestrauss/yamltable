@@ -48,9 +48,7 @@ def run_command(command: str, error_msg: str) -> None:
 
 
 @app.command()
-def run(
-    build: bool = typer.Option(False, help="Build image before running.")
-) -> None:
+def run() -> None:
     """Run project Docker image."""
 
     tag = yamltable.__version__

@@ -95,14 +95,14 @@ def test_dependencies_circular_error() -> None:
 def test_validate_bad_schema() -> None:
     """Check that validation works for unnested list of dictionaries."""
 
-    schema = {"type": "data"}
+    schema_ = {"type": "data"}
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
         {"mock_key_1": 2, "mock_key_2": 3},
     ]
 
     expected = (False, -1, "invalid schema: Unknown type: 'data'")
-    actual = yamltable.validate(dicts, schema)
+    actual = yamltable.validate(dicts, schema_)
     assert actual == expected
 
 
