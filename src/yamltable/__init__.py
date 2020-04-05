@@ -137,7 +137,7 @@ def validate(
         try:
             validator(row)
         except fastjsonschema.JsonSchemaException as xcpt:
-            return False, idx, xcpt.message
+            return False, idx, str(xcpt)
 
     return True, -1, ""
 
