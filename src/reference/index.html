@@ -585,8 +585,7 @@ classes, functions and methods.</p>
 <p>Command line interface for sorting YAML files.</p>
 <h2 id="yamltable.dependencies"><code class="codehilite"><span class="n">dependencies</span><span class="p">(</span><span class="n">unsorted</span><span class="p">,</span> <span class="n">depends</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.dependencies" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>16
-17
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>17
 18
 19
 20
@@ -635,7 +634,6 @@ classes, functions and methods.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        Rows sorted by requirements.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">sorted_</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">while</span> <span class="n">unsorted</span><span class="p">:</span>
         <span class="c1"># Find rows containing only dependencies in sorted_.</span>
@@ -760,8 +758,7 @@ classes, functions and methods.</p>
 85
 86
 87
-88
-89</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">read</span><span class="p">(</span>
+88</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">read</span><span class="p">(</span>
     <span class="n">stream</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">IO</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Read data from YAML file.</span>
@@ -776,7 +773,6 @@ classes, functions and methods.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        YAML data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
 
@@ -857,7 +853,8 @@ classes, functions and methods.</p>
 </div>
 <h2 id="yamltable.search"><code class="codehilite"><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.search" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 92
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 91
+ 92
  93
  94
  95
@@ -867,9 +864,7 @@ classes, functions and methods.</p>
  99
 100
 101
-102
-103
-104</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
+102</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Search dictionaries by key and value.</span>
 
 <span class="sd">    Args:</span>
@@ -880,7 +875,6 @@ classes, functions and methods.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        Matching dictionaries.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">return</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
@@ -936,7 +930,9 @@ classes, functions and methods.</p>
 </div>
 <h2 id="yamltable.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.sort" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>107
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>105
+106
+107
 108
 109
 110
@@ -944,10 +940,7 @@ classes, functions and methods.</p>
 112
 113
 114
-115
-116
-117
-118</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
+115</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Sort dictionaries based on value for supplied key name.</span>
 
 <span class="sd">    Args:</span>
@@ -957,7 +950,6 @@ classes, functions and methods.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        List of sorted dictionaries.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
 </code></pre></div>
 </td></tr></table>
@@ -1007,7 +999,10 @@ classes, functions and methods.</p>
 </div>
 <h2 id="yamltable.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.validate" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>121
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>118
+119
+120
+121
 122
 123
 124
@@ -1028,11 +1023,7 @@ classes, functions and methods.</p>
 139
 140
 141
-142
-143
-144
-145
-146</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+142</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
     <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Check that each row satisfies the schema.</span>
@@ -1045,7 +1036,6 @@ classes, functions and methods.</p>
 <span class="sd">        Whether all rows are valid, invalid row index or -1,</span>
 <span class="sd">            invalid error message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">try</span><span class="p">:</span>
         <span class="n">validator</span> <span class="o">=</span> <span class="n">fastjsonschema</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="n">fastjsonschema</span><span class="o">.</span><span class="n">JsonSchemaDefinitionException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
@@ -1055,7 +1045,7 @@ classes, functions and methods.</p>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">validator</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">fastjsonschema</span><span class="o">.</span><span class="n">JsonSchemaException</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">xcpt</span><span class="o">.</span><span class="n">message</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">xcpt</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
 </code></pre></div>
@@ -1106,7 +1096,11 @@ classes, functions and methods.</p>
 </div>
 <h2 id="yamltable.write"><code class="codehilite"><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.write" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>149
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>145
+146
+147
+148
+149
 150
 151
 152
@@ -1122,12 +1116,7 @@ classes, functions and methods.</p>
 162
 163
 164
-165
-166
-167
-168
-169
-170</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
+165</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
     <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
     <span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span>
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1141,7 +1130,6 @@ classes, functions and methods.</p>
 <span class="sd">        schema: JSON schema dictionary.</span>
 <span class="sd">        sort_keys: Whether to sort row keys.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">if</span> <span class="n">schema</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
             <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="n">sort_keys</span><span class="p">)</span>
@@ -1205,7 +1193,7 @@ named <strong>main</strong>.py.</p>
 <div class="autodoc">
 <p>Colors for message types.</p>
 </div>
-<h3 id="yamltable.__main__.index_"><code class="codehilite"><span class="n">index_</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fecef5c9a58</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.index_" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.index_"><code class="codehilite"><span class="n">index_</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.index_" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
 <details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>48
 49
@@ -1215,11 +1203,9 @@ named <strong>main</strong>.py.</p>
 53
 54
 55
-56
-57</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+56</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index_</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get row at INDEX in FILE_PATH.&quot;&quot;&quot;</span>
-
     <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
@@ -1232,9 +1218,10 @@ named <strong>main</strong>.py.</p>
 </details>
 <p>Get row at INDEX in FILE_PATH.</p>
 </div>
-<h3 id="yamltable.__main__.list_"><code class="codehilite"><span class="n">list_</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fecef5c9a58</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.list_" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.list_"><code class="codehilite"><span class="n">list_</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.list_" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>60
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>59
+60
 61
 62
 63
@@ -1245,12 +1232,9 @@ named <strong>main</strong>.py.</p>
 68
 69
 70
-71
-72
-73</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
+71</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">list_</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;List all dictionary KEY values in FILE_PATH.&quot;&quot;&quot;</span>
-
     <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1269,7 +1253,9 @@ named <strong>main</strong>.py.</p>
 </div>
 <h3 id="yamltable.__main__.load_data"><code class="codehilite"><span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.load_data" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>76
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>74
+75
+76
 77
 78
 79
@@ -1280,10 +1266,7 @@ named <strong>main</strong>.py.</p>
 84
 85
 86
-87
-88
-89
-90</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]]:</span>
+87</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Attempt to load data from YAML file.</span>
 
 <span class="sd">    Args:</span>
@@ -1292,7 +1275,6 @@ named <strong>main</strong>.py.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        YAML row data, YAML schema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
@@ -1338,9 +1320,12 @@ named <strong>main</strong>.py.</p>
 </tbody>
 </table>
 </div>
-<h3 id="yamltable.__main__.search"><code class="codehilite"><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fecef5c9a58</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.search" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.search"><code class="codehilite"><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.search" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 93
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 90
+ 91
+ 92
+ 93
  94
  95
  96
@@ -1351,14 +1336,9 @@ named <strong>main</strong>.py.</p>
 101
 102
 103
-104
-105
-106
-107
-108</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+104</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.&quot;&quot;&quot;</span>
-
     <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1377,23 +1357,21 @@ named <strong>main</strong>.py.</p>
 </details>
 <p>Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.</p>
 </div>
-<h3 id="yamltable.__main__.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fecef5c9a58</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.sort" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.sort" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>111
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>107
+108
+109
+110
+111
 112
 113
 114
 115
 116
-117
-118
-119
-120
-121
-122</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+117</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Sort dictionaries in FILE_PATH by KEY values.&quot;&quot;&quot;</span>
-
     <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">sorted_rows</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
@@ -1408,9 +1386,14 @@ named <strong>main</strong>.py.</p>
 </details>
 <p>Sort dictionaries in FILE_PATH by KEY values.</p>
 </div>
-<h3 id="yamltable.__main__.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fecef5c9a58</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.validate" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.validate" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>125
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>120
+121
+122
+123
+124
+125
 126
 127
 128
@@ -1419,16 +1402,9 @@ named <strong>main</strong>.py.</p>
 131
 132
 133
-134
-135
-136
-137
-138
-139
-140</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+134</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check that every dictionary in FILE_PATH has conforms to its schema.&quot;&quot;&quot;</span>
-
     <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">valid</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
