@@ -17,7 +17,6 @@ def sort_nested_dict(mmap: MutableMapping[str, Any]) -> collections.OrderedDict:
     Returns:
         Sorted map.
     """
-
     for key, val in mmap.items():
         if isinstance(val, dict):
             mmap[key] = sort_nested_dict(val)
@@ -27,7 +26,6 @@ def sort_nested_dict(mmap: MutableMapping[str, Any]) -> collections.OrderedDict:
 
 def main() -> None:
     """Entrypoint for pyproject.toml file sorting."""
-
     repo_path = pathlib.Path(__file__).parents[1]
     file_path = repo_path / "pyproject.toml"
 

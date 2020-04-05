@@ -16,7 +16,6 @@ app = typer.Typer(
 @app.command()
 def build() -> None:
     """Build image from project Dockerfile."""
-
     tag = yamltable.__version__
     command = f"docker build -t wolfgangwazzlestrauss/yamltable:{tag} ."
     error_msg = "Failed to build Docker image."
@@ -26,7 +25,6 @@ def build() -> None:
 @app.command()
 def prune() -> None:
     """Prune all containers and images on system."""
-
     error_msg = "Failed to prune system {}."
     run_command("docker container prune -f", error_msg.format("containers"))
     run_command("docker image prune -f", error_msg.format("images"))
@@ -39,7 +37,6 @@ def run_command(command: str, error_msg: str) -> None:
         command: Command to execute after preparing documentation.
         error_msg: Error message if command fails.
     """
-
     try:
         subprocess.run(args=command, shell=True, check=True)
     except subprocess.CalledProcessError:
@@ -50,7 +47,6 @@ def run_command(command: str, error_msg: str) -> None:
 @app.command()
 def run() -> None:
     """Run project Docker image."""
-
     tag = yamltable.__version__
     image = f"wolfgangwazzlestrauss/yamltable:{tag}"
 

@@ -4,6 +4,7 @@
 from typing import List
 
 import pytest
+
 import yamltable
 from yamltable.typing import Row, Schema
 
@@ -14,7 +15,6 @@ from yamltable.typing import Row, Schema
 )
 def test_read_bad_data(file_data: str) -> None:
     """Check that reader throws an exception when reading invalid YAML file."""
-
     with pytest.raises(TypeError):
         yamltable.read(file_data)
 
@@ -28,7 +28,6 @@ def test_read_bad_data(file_data: str) -> None:
 )
 def test_read_good_data(file_data: str, expected: List[Row]) -> None:
     """Check that reader correctly reads data that is a list."""
-
     actual, _ = yamltable.read(file_data)
 
     assert actual == expected
@@ -36,7 +35,6 @@ def test_read_good_data(file_data: str, expected: List[Row]) -> None:
 
 def test_search() -> None:
     """Check that searching works for unnested list of dictionaries."""
-
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
         {"mock_key_1": 2, "mock_key_2": 3},
@@ -49,7 +47,6 @@ def test_search() -> None:
 
 def test_sort() -> None:
     """Check that sorting works for unnested list of dictionaries."""
-
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
         {"mock_key_1": 2, "mock_key_2": 3},
@@ -65,7 +62,6 @@ def test_sort() -> None:
 
 def test_dependencies() -> None:
     """Check that dependencies are resolved."""
-
     dicts = [
         {"name": 1, "depends": [2]},
         {"name": 2, "depends": []},
@@ -82,7 +78,6 @@ def test_dependencies() -> None:
 
 def test_dependencies_circular_error() -> None:
     """Check that error is raised when a circular dependency is encountered."""
-
     dicts = [
         {"name": 1, "depends": [2]},
         {"name": 2, "depends": [1]},
@@ -94,7 +89,6 @@ def test_dependencies_circular_error() -> None:
 
 def test_validate_bad_schema() -> None:
     """Check that validation works for unnested list of dictionaries."""
-
     schema_ = {"type": "data"}
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
@@ -113,7 +107,6 @@ def schema(scope: str = "module") -> Schema:
     Return:
         JSON schema dictionary
     """
-
     return {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
@@ -128,7 +121,6 @@ def schema(scope: str = "module") -> Schema:
 
 def test_validate_bad_data(schema: Schema) -> None:
     """Check that validation works for unnested list of dictionaries."""
-
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
         {"mock_key_1": 2, "mock_key_2": False},
@@ -141,7 +133,6 @@ def test_validate_bad_data(schema: Schema) -> None:
 
 def test_validate_good_data(schema: Schema) -> None:
     """Check that validation works for unnested list of dictionaries."""
-
     dicts = [
         {"mock_key_1": 1, "mock_key_2": 5},
         {"mock_key_1": 2, "mock_key_2": 3},
