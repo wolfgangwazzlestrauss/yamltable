@@ -6,6 +6,7 @@ from typing import Any, IO, Iterable, List, Optional, Sequence, Tuple, Union
 
 import fastjsonschema
 import yaml
+
 from yamltable.typing import Row, Schema
 
 
@@ -27,7 +28,6 @@ def dependencies(unsorted: Sequence[Row], depends: str, name: str) -> List[Row]:
     Returns:
         Rows sorted by requirements.
     """
-
     sorted_: List[Row] = []
     while unsorted:
         # Find rows containing only dependencies in sorted_.
@@ -67,7 +67,6 @@ def read(
     Returns:
         YAML data.
     """
-
     if isinstance(stream, pathlib.Path):
         stream = stream.read_text()
 
@@ -100,7 +99,6 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
     Returns:
         Matching dictionaries.
     """
-
     return [row for row in rows if key in row and row[key] == val]
 
 
@@ -114,7 +112,6 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
     Returns:
         List of sorted dictionaries.
     """
-
     return sorted(rows, key=lambda row: row[key])
 
 
@@ -131,7 +128,6 @@ def validate(
         Whether all rows are valid, invalid row index or -1,
             invalid error message.
     """
-
     try:
         validator = fastjsonschema.compile(schema)
     except (fastjsonschema.JsonSchemaDefinitionException, TypeError) as xcpt:
@@ -141,7 +137,7 @@ def validate(
         try:
             validator(row)
         except fastjsonschema.JsonSchemaException as xcpt:
-            return False, idx, xcpt.message
+            return False, idx, str(xcpt)
 
     return True, -1, ""
 
@@ -160,7 +156,6 @@ def write(
         schema: JSON schema dictionary.
         sort_keys: Whether to sort row keys.
     """
-
     if schema is None:
         with open(file_path, "w") as handle:
             yaml.dump(rows, handle, sort_keys=sort_keys)

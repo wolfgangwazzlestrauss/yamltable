@@ -10,7 +10,6 @@ import yamltable
 
 def test_yamltable_version() -> None:
     """Check that all the version tags are in sync."""
-
     # Check for pyproject.toml in two places in case of nonlocal install.
     toml_path = pathlib.Path("pyproject.toml")
     if toml_path.exists():
