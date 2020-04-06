@@ -4,6 +4,7 @@
   "description": "CLI for working with YAML files organized similar to a relational database table.",
   "scripts": {
     "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
+    "profile": "speedscope",
     "test": "prettier --check **/*.{css,html,js,json,md,yaml,yml}"
   },
   "repository": {
@@ -14,7 +15,8 @@
   "license": "MIT",
   "homepage": "https://github.com/wolfgangwazzlestrauss/yamltable#readme",
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "speedscope": "^1.5.3"
   },
   "prettier": {
     "arrowParens": "always",

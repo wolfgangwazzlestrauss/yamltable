@@ -8,7 +8,7 @@ import subprocess
 import typer
 
 
-app = typer.Typer(help="Script for building and serving documentation.")
+app = typer.Typer(help=__doc__)
 
 
 @app.command()
