@@ -19,18 +19,12 @@ class Format(enum.Enum):
     SPEEDSCOPE = "speedscope"
 
 
-def run_command(command: str, error_msg: str) -> None:
-    """Run shell command and print error message on failure.
-
-    Args:
-        command: Command to execute after preparing documentation.
-        error_msg: Error message if command fails.
-    """
-    try:
-        subprocess.run(args=command, shell=True, check=True)
-    except subprocess.CalledProcessError:
-        typer.secho(f"Error: {error_msg}", fg=typer.colors.RED, err=True)
-        raise typer.Exit(1)
+@app.command()
+def clean() -> None:
+    """Clean profiling local cache."""
+    local_cache = pathlib.Path("scripts/.cache/profile")
+    for path in local_cache.iterdir():
+        path.unlink()
 
 
 def _launch(prof_path: pathlib.Path, fmt: Format) -> None:
@@ -66,7 +60,8 @@ def _prof_path(fmt: Format) -> pathlib.Path:
 
 
 @app.command()
-def profile(
+def record(
+    program: str,
     launch: bool = typer.Option(
         True, help="Show profile results in web browser."
     ),
@@ -74,16 +69,29 @@ def profile(
         Format.SPEEDSCOPE.value, help="Profile results output format."
     ),
 ) -> None:
-    """Profile Python code with py-spy."""
+    """Profile Python PROGRAM with py-spy."""
     prof_path = _prof_path(fmt)
 
-    pyspy = "py-spy record --format speedscope"
-    prog = "yamltable search name drive tests/data/path.yaml"
-    command = f"{pyspy} -o {prof_path} -- {prog}"
+    pyspy = f"py-spy record --format {fmt.value}"
+    command = f"{pyspy} -o {prof_path} -- {program}"
 
     run_command(command, "Error: Unable to execute profiler.")
     if launch:
         _launch(prof_path, fmt)
+
+
+def run_command(command: str, error_msg: str) -> None:
+    """Run shell command and print error message on failure.
+
+    Args:
+        command: Command to execute after preparing documentation.
+        error_msg: Error message if command fails.
+    """
+    try:
+        subprocess.run(args=command, shell=True, check=True)
+    except subprocess.CalledProcessError:
+        typer.secho(f"Error: {error_msg}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(1)
 
 
 if __name__ == "__main__":
