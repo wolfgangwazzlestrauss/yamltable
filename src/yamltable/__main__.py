@@ -126,5 +126,5 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
         raise typer.Exit(code=ExitCode.INVALID.value)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app()

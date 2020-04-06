@@ -137,3 +137,37 @@ def test_sort(tmp_path: pathlib.Path) -> None:
 
     assert result.exit_code == ExitCode.SUCCESS.value
     assert actual == expected
+
+
+def test_sort_error(tmp_yaml: pathlib.Path) -> None:
+    """Command line test for search command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["sort", "dest", str(tmp_yaml)])
+
+    assert result.exit_code == ExitCode.ERROR.value
+
+
+def test_validate() -> None:
+    """Command line test for search command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["validate", "tests/data/path.yaml"])
+
+    assert result.exit_code == ExitCode.SUCCESS.value
+
+
+def test_validate_bad_schema() -> None:
+    """Command line test for search command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["validate", "tests/data/bad_schema.yaml"])
+
+    assert result.exit_code == ExitCode.ERROR.value
+
+
+def test_validate_invalid_row() -> None:
+    """Command line test for search command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(
+        main.app, ["validate", "tests/data/invalid_row.yaml"]
+    )
+
+    assert result.exit_code == ExitCode.INVALID.value
