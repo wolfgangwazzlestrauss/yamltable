@@ -95,28 +95,10 @@ def test_validate_bad_schema() -> None:
         {"mock_key_1": 2, "mock_key_2": 3},
     ]
 
-    expected = (False, -1, "invalid schema: Unknown type: 'data'")
-    actual = yamltable.validate(dicts, schema_)
+    expected = (False, -1, "'data' is not valid under any of the given schemas")
+    result = yamltable.validate(dicts, schema_)
+    actual = (result[0], result[1], result[2].split("\n")[0])
     assert actual == expected
-
-
-@pytest.fixture
-def schema(scope: str = "module") -> Schema:
-    """Create reusable JSON schema object.
-
-    Return:
-        JSON schema dictionary
-    """
-    return {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-            "mock_key_1": {"type": "number"},
-            "mock_key_2": {"type": "number"},
-        },
-        "required": ["mock_key_1", "mock_key_2"],
-        "additionalProperties": "false",
-    }
 
 
 def test_validate_bad_data(schema: Schema) -> None:
@@ -126,8 +108,9 @@ def test_validate_bad_data(schema: Schema) -> None:
         {"mock_key_1": 2, "mock_key_2": False},
     ]
 
-    expected = (False, 1, "data.mock_key_2 must be number")
-    actual = yamltable.validate(dicts, schema)
+    expected = (False, 1, "False is not of type 'number'")
+    result = yamltable.validate(dicts, schema)
+    actual = (result[0], result[1], result[2].split("\n")[0])
     assert actual == expected
 
 

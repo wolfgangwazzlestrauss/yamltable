@@ -32,7 +32,7 @@ def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
         row = rows[index]
     except IndexError:
         typer.secho(
-            f"Error: Index {index} is out of bounds",
+            f"Error: Index {index} is out of bounds.",
             fg=StatusColor.ERROR.value,
             err=True,
         )
@@ -51,7 +51,7 @@ def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
             typer.secho(row[key])
         except KeyError:
             typer.secho(
-                f"Error: Row {idx} does not have key {key}",
+                f"Error: Row {idx} does not have key {key}.",
                 fg=StatusColor.ERROR.value,
                 err=True,
             )
@@ -112,7 +112,8 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
 
     if valid:
         typer.secho(
-            "YAML file rows conform to its schema", fg=StatusColor.SUCCESS.value
+            "YAML file rows conform to its schema.",
+            fg=StatusColor.SUCCESS.value,
         )
     elif row == -1:
         typer.secho(

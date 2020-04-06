@@ -4,7 +4,8 @@
 import pathlib
 from typing import Any, IO, Iterable, List, Optional, Sequence, Tuple, Union
 
-import fastjsonschema
+import jsonschema
+from jsonschema import exceptions
 import yaml
 
 from yamltable.typing import Row, Schema
@@ -129,15 +130,18 @@ def validate(
             invalid error message.
     """
     try:
-        validator = fastjsonschema.compile(schema)
-    except (fastjsonschema.JsonSchemaDefinitionException, TypeError) as xcpt:
-        return False, -1, f"invalid schema: {xcpt}"
+        jsonschema.Draft7Validator.check_schema(schema)
+    except (exceptions.SchemaError, exceptions.UnknownType) as xcpt:
+        error_msg = str(xcpt)
+        return False, -1, error_msg
 
+    validator = jsonschema.Draft7Validator(schema)
     for idx, row in enumerate(rows):
         try:
-            validator(row)
-        except fastjsonschema.JsonSchemaException as xcpt:
-            return False, idx, str(xcpt)
+            validator.validate(row)
+        except exceptions.ValidationError as xcpt:
+            error_msg = str(xcpt)
+            return False, idx, error_msg
 
     return True, -1, ""
 
