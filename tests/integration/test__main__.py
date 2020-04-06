@@ -1,17 +1,93 @@
 """Integration tests for YamlTable's command line interface."""
 
 
+import pathlib
 import pprint
 
 from typer import testing
+import yaml
 
 import yamltable.__main__ as main
+from yamltable.typing import ExitCode
+
+
+def test_index() -> None:
+    """Command line test for index command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["index", "2", "tests/data/path.yaml"])
+
+    expected = pprint.pformat(
+        {
+            "name": "bash-profile",
+            "dest": "$HOME/.bash_profile",
+            "description": "BASH settings",
+            "source": None,
+            "type": "file",
+        },
+        indent=2,
+    )
+    actual = result.stdout.strip()
+
+    assert result.exit_code == ExitCode.SUCCESS.value
+    assert actual == expected
+
+
+def test_index_error() -> None:
+    """Command line test for index command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["index", "20", "tests/data/path.yaml"])
+
+    assert result.exit_code == ExitCode.ERROR.value
+
+
+def test_load_data_error() -> None:
+    """Command line test for index command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(
+        main.app, ["list", "name", "tests/data/bad_format.yaml"]
+    )
+
+    assert result.exit_code == ExitCode.ERROR.value
+
+
+def test_list() -> None:
+    """Command line test for index command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["list", "name", "tests/data/path.yaml"])
+
+    expected = "\n".join(
+        [
+            "repo",
+            "ssh",
+            "bash-profile",
+            "system",
+            "bash-key",
+            "drive",
+            "vscode-settings",
+            "vscode-keybindings",
+            "vscode-snippets",
+        ]
+    )
+    actual = result.stdout.strip()
+
+    assert result.exit_code == ExitCode.SUCCESS.value
+    assert actual == expected
+
+
+def test_list_error() -> None:
+    """Command line test for index command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(
+        main.app, ["list", "bad_name", "tests/data/path.yaml"]
+    )
+
+    assert result.exit_code == ExitCode.ERROR.value
 
 
 def test_search() -> None:
-    """Command line test for search option."""
+    """Command line test for search command."""
     runner = testing.CliRunner()
-    resp = runner.invoke(
+    result = runner.invoke(
         main.app, ["search", "name", "repo", "tests/data/path.yaml"]
     )
 
@@ -25,7 +101,39 @@ def test_search() -> None:
         },
         indent=2,
     )
-    actual = resp.stdout.strip()
+    actual = result.stdout.strip()
 
-    assert resp.exit_code == 0
+    assert result.exit_code == ExitCode.SUCCESS.value
+    assert actual == expected
+
+
+def test_search_empty() -> None:
+    """Command line test for search command."""
+    runner = testing.CliRunner()
+    result = runner.invoke(
+        main.app, ["search", "name", "missing", "tests/data/path.yaml"]
+    )
+
+    expected = "No rows found with (key=name, value=missing) pair."
+    actual = result.stdout.strip()
+
+    assert result.exit_code == ExitCode.SUCCESS.value
+    assert actual == expected
+
+
+def test_sort(tmp_path: pathlib.Path) -> None:
+    """Command line test for search command."""
+    data = [{"name": "second"}, {"name": "first"}]
+    file_path = tmp_path / "path.yaml"
+    with file_path.open("w") as handle:
+        yaml.dump(data, handle)
+
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["sort", "name", str(file_path)])
+
+    expected = [data[1], data[0]]
+    with file_path.open("r") as handle:
+        actual = yaml.safe_load(handle)
+
+    assert result.exit_code == ExitCode.SUCCESS.value
     assert actual == expected

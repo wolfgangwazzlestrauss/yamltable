@@ -5,7 +5,6 @@ named __main__.py.
 """
 
 
-import enum
 import pathlib
 import pprint
 from typing import List, Optional, Tuple
@@ -13,12 +12,7 @@ from typing import List, Optional, Tuple
 import typer
 
 import yamltable
-from yamltable.typing import Row, Schema
-
-
-FileArg = typer.Argument(
-    ..., dir_okay=False, exists=True, file_okay=True, resolve_path=True
-)
+from yamltable.typing import ExitCode, FileArg, Row, Schema, StatusColor
 
 
 app = typer.Typer(
@@ -29,46 +23,39 @@ app = typer.Typer(
 )
 
 
-class Code(enum.Enum):
-    """Exit code statuses."""
-
-    SUCCESS = 0
-    INVALID = 1
-    ERROR = 2
-
-
-class Msg(enum.Enum):
-    """Colors for message types."""
-
-    EMPTY = typer.colors.YELLOW
-    ERROR = typer.colors.RED
-    SUCCESS = typer.colors.BRIGHT_GREEN
-
-
 @app.command(name="index")
 def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
     """Get row at INDEX in FILE_PATH."""
     rows, _ = load_data(file_path)
+
     try:
-        typer.echo(rows[index])
+        row = rows[index]
     except IndexError:
-        typer.secho(f"error: {index} is out of bounds", fg=Msg.ERROR.value)
-        typer.Exit(code=Code.ERROR.value)
+        typer.secho(
+            f"Error: Index {index} is out of bounds",
+            fg=StatusColor.ERROR.value,
+            err=True,
+        )
+        raise typer.Exit(code=ExitCode.ERROR.value)
+    else:
+        typer.secho(pprint.pformat(row, indent=2))
 
 
 @app.command(name="list")
 def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
     """List all dictionary KEY values in FILE_PATH."""
     rows, _ = load_data(file_path)
+
     for idx, row in enumerate(rows):
         try:
-            typer.echo(row[key])
+            typer.secho(row[key])
         except KeyError:
             typer.secho(
-                f"error: row {idx} does not have key {key}", fg=Msg.ERROR.value
+                f"Error: Row {idx} does not have key {key}",
+                fg=StatusColor.ERROR.value,
+                err=True,
             )
-            typer.Exit(code=Code.ERROR.value)
-            break
+            raise typer.Exit(code=ExitCode.ERROR.value)
 
 
 def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
@@ -83,24 +70,23 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     try:
         return yamltable.read(file_path)
     except (FileNotFoundError, TypeError) as xcpt:
-        typer.secho(str(xcpt), fg=Msg.ERROR.value)
-        raise typer.Exit(code=Code.ERROR.value)
+        typer.secho(f"Error: {xcpt}", fg=StatusColor.ERROR.value, err=True)
+        raise typer.Exit(code=ExitCode.ERROR.value)
 
 
 @app.command()
 def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
     """Search dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
     rows, _ = load_data(file_path)
+    matches = yamltable.search(key, value, rows)
 
-    count = 0
-    for match in yamltable.search(key, value, rows):
-        count += 1
-        typer.echo(pprint.pformat(match, indent=2))
-
-    if count == 0:
+    if matches:
+        for match in yamltable.search(key, value, rows):
+            typer.secho(pprint.pformat(match, indent=2))
+    else:
         typer.secho(
-            f"no dictionaries found with (key={key}, value={value}) pair",
-            fg=Msg.EMPTY.value,
+            f"No rows found with (key={key}, value={value}) pair.",
+            fg=StatusColor.EMPTY.value,
         )
 
 
@@ -108,11 +94,12 @@ def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
 def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
     """Sort dictionaries in FILE_PATH by KEY values."""
     rows, schema = load_data(file_path)
+
     try:
         sorted_rows = yamltable.sort(key, rows)
     except TypeError as xcpt:
-        typer.secho(f"error: {xcpt}", fg=Msg.ERROR.value)
-        typer.Exit(code=Code.ERROR.value)
+        typer.secho(f"Error: {xcpt}", fg=StatusColor.ERROR.value, err=True)
+        raise typer.Exit(code=ExitCode.ERROR.value)
     else:
         yamltable.write(file_path, sorted_rows, schema)
 
@@ -122,16 +109,21 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
     """Check that every dictionary in FILE_PATH has conforms to its schema."""
     rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
+
     if valid:
         typer.secho(
-            "YAML file rows conform to its schema", fg=Msg.SUCCESS.value
+            "YAML file rows conform to its schema", fg=StatusColor.SUCCESS.value
         )
     elif row == -1:
-        typer.secho(f"invalid schema: {msg}", fg=Msg.ERROR.value)
-        typer.Exit(code=Code.ERROR.value)
+        typer.secho(
+            f"Invalid schema: {msg}", fg=StatusColor.ERROR.value, err=True
+        )
+        raise typer.Exit(code=ExitCode.ERROR.value)
     else:
-        typer.secho(f"invalid row {row}: {msg}", fg=Msg.ERROR.value)
-        typer.Exit(code=Code.INVALID.value)
+        typer.secho(
+            f"Invalid row {row}: {msg}", fg=StatusColor.ERROR.value, err=True
+        )
+        raise typer.Exit(code=ExitCode.INVALID.value)
 
 
 if __name__ == "__main__":
