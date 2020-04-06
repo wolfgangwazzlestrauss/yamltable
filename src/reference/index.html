@@ -331,20 +331,6 @@ relational database table.
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#yamltable.9595main9595.Code" class="md-nav__link">
-    Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yamltable.9595main9595.Msg" class="md-nav__link">
-    Msg
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#yamltable.9595main9595.index_" class="md-nav__link">
     index_()
   </a>
@@ -395,6 +381,26 @@ relational database table.
   <a href="#yamltable.typing" class="md-nav__link">
     typing
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yamltable.typing.ExitCode" class="md-nav__link">
+    ExitCode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yamltable.typing.StatusColor" class="md-nav__link">
+    StatusColor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -492,20 +498,6 @@ relational database table.
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#yamltable.9595main9595.Code" class="md-nav__link">
-    Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yamltable.9595main9595.Msg" class="md-nav__link">
-    Msg
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#yamltable.9595main9595.index_" class="md-nav__link">
     index_()
   </a>
@@ -556,6 +548,26 @@ relational database table.
   <a href="#yamltable.typing" class="md-nav__link">
     typing
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yamltable.typing.ExitCode" class="md-nav__link">
+    ExitCode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yamltable.typing.StatusColor" class="md-nav__link">
+    StatusColor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1185,17 +1197,52 @@ classes, functions and methods.</p>
 <p>Command line interface for YamlTable.</p>
 <p>See <a href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">https://docs.python.org/3/using/cmdline.html#cmdoption-m</a> for why module is
 named <strong>main</strong>.py.</p>
-<h3 id="yamltable.__main__.Code"><code class="codehilite"><span class="n">Code</span></code><a class="headerlink" href="#yamltable.__main__.Code" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.index_"><code class="codehilite"><span class="n">index_</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f89d4a975c0</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.index_" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<p>Exit code statuses.</p>
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index_</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get row at INDEX in FILE_PATH.&quot;&quot;&quot;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Error: Index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2"> is out of bounds&quot;</span><span class="p">,</span>
+            <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+</td></tr></table>
+
+</details>
+<p>Get row at INDEX in FILE_PATH.</p>
 </div>
-<h3 id="yamltable.__main__.Msg"><code class="codehilite"><span class="n">Msg</span></code><a class="headerlink" href="#yamltable.__main__.Msg" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.list_"><code class="codehilite"><span class="n">list_</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f89d4a975c0</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.list_" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<p>Colors for message types.</p>
-</div>
-<h3 id="yamltable.__main__.index_"><code class="codehilite"><span class="n">index_</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.index_" title="Permanent link">&para;</a></h3>
-<div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>48
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>44
+45
+46
+47
+48
 49
 50
 51
@@ -1203,26 +1250,32 @@ named <strong>main</strong>.py.</p>
 53
 54
 55
-56</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index_</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get row at INDEX in FILE_PATH.&quot;&quot;&quot;</span>
+56
+57
+58</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">list_</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;List all dictionary KEY values in FILE_PATH.&quot;&quot;&quot;</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
-    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error: </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2"> is out of bounds&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Error: Row </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> does not have key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 
 </details>
-<p>Get row at INDEX in FILE_PATH.</p>
+<p>List all dictionary KEY values in FILE_PATH.</p>
 </div>
-<h3 id="yamltable.__main__.list_"><code class="codehilite"><span class="n">list_</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.list_" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.load_data"><code class="codehilite"><span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.load_data" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>59
-60
-61
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>61
 62
 63
 64
@@ -1232,41 +1285,10 @@ named <strong>main</strong>.py.</p>
 68
 69
 70
-71</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;list&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">list_</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;List all dictionary KEY values in FILE_PATH.&quot;&quot;&quot;</span>
-    <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;error: row </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2"> does not have key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span>
-            <span class="p">)</span>
-            <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-            <span class="k">break</span>
-</code></pre></div>
-</td></tr></table>
-
-</details>
-<p>List all dictionary KEY values in FILE_PATH.</p>
-</div>
-<h3 id="yamltable.__main__.load_data"><code class="codehilite"><span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.load_data" title="Permanent link">&para;</a></h3>
-<div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]]:</span>
+71
+72
+73
+74</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Attempt to load data from YAML file.</span>
 
 <span class="sd">    Args:</span>
@@ -1278,8 +1300,8 @@ named <strong>main</strong>.py.</p>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">xcpt</span><span class="p">),</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">xcpt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 
@@ -1320,12 +1342,44 @@ named <strong>main</strong>.py.</p>
 </tbody>
 </table>
 </div>
-<h3 id="yamltable.__main__.search"><code class="codehilite"><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.search" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.search"><code class="codehilite"><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f89d4a975c0</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.search" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 90
- 91
- 92
- 93
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.&quot;&quot;&quot;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">matches</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
+            <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;No rows found with (key=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">, value=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) pair.&quot;</span><span class="p">,</span>
+            <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">EMPTY</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+
+</details>
+<p>Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.</p>
+</div>
+<h3 id="yamltable.__main__.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f89d4a975c0</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.sort" title="Permanent link">&para;</a></h3>
+<div class="autodoc">
+<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 93
  94
  95
  96
@@ -1337,27 +1391,24 @@ named <strong>main</strong>.py.</p>
 102
 103
 104</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.&quot;&quot;&quot;</span>
-    <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sort dictionaries in FILE_PATH by KEY values.&quot;&quot;&quot;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
-    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">rows</span><span class="p">):</span>
-        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;no dictionaries found with (key=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">, value=</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">) pair&quot;</span><span class="p">,</span>
-            <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">EMPTY</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sorted_rows</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">xcpt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yamltable</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sorted_rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 
 </details>
-<p>Search dictionaries in FILE_PATH with matching KEY and VALUE pairs.</p>
+<p>Sort dictionaries in FILE_PATH by KEY values.</p>
 </div>
-<h3 id="yamltable.__main__.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.sort" title="Permanent link">&para;</a></h3>
+<h3 id="yamltable.__main__.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f89d4a975c0</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.validate" title="Permanent link">&para;</a></h3>
 <div class="autodoc">
 <details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>107
 108
@@ -1369,54 +1420,35 @@ named <strong>main</strong>.py.</p>
 114
 115
 116
-117</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Sort dictionaries in FILE_PATH by KEY values.&quot;&quot;&quot;</span>
-    <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">sorted_rows</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">xcpt</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;error: </span><span class="si">{</span><span class="n">xcpt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">yamltable</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sorted_rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-
-</details>
-<p>Sort dictionaries in FILE_PATH by KEY values.</p>
-</div>
-<h3 id="yamltable.__main__.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">file_path</span><span class="o">=&lt;</span><span class="n">typer</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ArgumentInfo</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f28aadc67b8</span><span class="o">&gt;</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__main__.validate" title="Permanent link">&para;</a></h3>
-<div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__main__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>120
+117
+118
+119
+120
 121
 122
 123
 124
 125
-126
-127
-128
-129
-130
-131
-132
-133
-134</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+126</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="n">FileArg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check that every dictionary in FILE_PATH has conforms to its schema.&quot;&quot;&quot;</span>
     <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">valid</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">yamltable</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
         <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
-            <span class="s2">&quot;YAML file rows conform to its schema&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">SUCCESS</span><span class="o">.</span><span class="n">value</span>
+            <span class="s2">&quot;YAML file rows conform to its schema&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">SUCCESS</span><span class="o">.</span><span class="n">value</span>
         <span class="p">)</span>
     <span class="k">elif</span> <span class="n">row</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid schema: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid schema: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid row </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">Msg</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-        <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">Code</span><span class="o">.</span><span class="n">INVALID</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">secho</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Invalid row </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="n">StatusColor</span><span class="o">.</span><span class="n">ERROR</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">typer</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">ExitCode</span><span class="o">.</span><span class="n">INVALID</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 
@@ -1427,6 +1459,14 @@ named <strong>main</strong>.py.</p>
 <h2 id="yamltable.typing"><code class="codehilite"><span class="n">typing</span></code><a class="headerlink" href="#yamltable.typing" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
 <p>Library types for YamlTable.</p>
+<h3 id="yamltable.typing.ExitCode"><code class="codehilite"><span class="n">ExitCode</span></code><a class="headerlink" href="#yamltable.typing.ExitCode" title="Permanent link">&para;</a></h3>
+<div class="autodoc">
+<p>Exit code statuses.</p>
+</div>
+<h3 id="yamltable.typing.StatusColor"><code class="codehilite"><span class="n">StatusColor</span></code><a class="headerlink" href="#yamltable.typing.StatusColor" title="Permanent link">&para;</a></h3>
+<div class="autodoc">
+<p>Colors for message types.</p>
+</div>
 </div>
                 
                   
