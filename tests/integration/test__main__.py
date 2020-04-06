@@ -7,6 +7,7 @@ import pprint
 from typer import testing
 import yaml
 
+import yamltable
 import yamltable.__main__ as main
 from yamltable.typing import ExitCode
 
@@ -171,3 +172,15 @@ def test_validate_invalid_row() -> None:
     )
 
     assert result.exit_code == ExitCode.INVALID.value
+
+
+def test_version() -> None:
+    """Ensure display of project version."""
+    runner = testing.CliRunner()
+    result = runner.invoke(main.app, ["version"])
+
+    expected = f"yamltable {yamltable.__version__}"
+    actual = result.stdout.strip()
+
+    assert result.exit_code == ExitCode.SUCCESS.value
+    assert actual == expected
