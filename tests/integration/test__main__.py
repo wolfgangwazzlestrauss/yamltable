@@ -12,7 +12,7 @@ from yamltable.typing import ExitCode
 
 
 def test_index() -> None:
-    """Command line test for index command."""
+    """Ensure correct stdout for index command."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["index", "2", "tests/data/path.yaml"])
 
@@ -33,7 +33,7 @@ def test_index() -> None:
 
 
 def test_index_error() -> None:
-    """Command line test for index command."""
+    """Ensure correct exit code for erroneous index command invocation."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["index", "20", "tests/data/path.yaml"])
 
@@ -41,7 +41,7 @@ def test_index_error() -> None:
 
 
 def test_load_data_error() -> None:
-    """Command line test for index command."""
+    """Ensure correct exit code when loading badly formatted YAML file."""
     runner = testing.CliRunner()
     result = runner.invoke(
         main.app, ["list", "name", "tests/data/bad_format.yaml"]
@@ -51,7 +51,7 @@ def test_load_data_error() -> None:
 
 
 def test_list() -> None:
-    """Command line test for index command."""
+    """Ensure correct stdout for list command."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["list", "name", "tests/data/path.yaml"])
 
@@ -75,7 +75,7 @@ def test_list() -> None:
 
 
 def test_list_error() -> None:
-    """Command line test for index command."""
+    """Ensure correct exit code for erroneous list command invocation."""
     runner = testing.CliRunner()
     result = runner.invoke(
         main.app, ["list", "bad_name", "tests/data/path.yaml"]
@@ -85,7 +85,7 @@ def test_list_error() -> None:
 
 
 def test_search() -> None:
-    """Command line test for search command."""
+    """Ensure correct stdout for search command."""
     runner = testing.CliRunner()
     result = runner.invoke(
         main.app, ["search", "name", "repo", "tests/data/path.yaml"]
@@ -108,7 +108,7 @@ def test_search() -> None:
 
 
 def test_search_empty() -> None:
-    """Command line test for search command."""
+    """Ensure correct stdout for search command with no results."""
     runner = testing.CliRunner()
     result = runner.invoke(
         main.app, ["search", "name", "missing", "tests/data/path.yaml"]
@@ -122,7 +122,7 @@ def test_search_empty() -> None:
 
 
 def test_sort(tmp_path: pathlib.Path) -> None:
-    """Command line test for search command."""
+    """Ensure correct stdout for sort command."""
     data = [{"name": "second"}, {"name": "first"}]
     file_path = tmp_path / "path.yaml"
     with file_path.open("w") as handle:
@@ -140,7 +140,7 @@ def test_sort(tmp_path: pathlib.Path) -> None:
 
 
 def test_sort_error(tmp_yaml: pathlib.Path) -> None:
-    """Command line test for search command."""
+    """Ensure correct exit code for erroneous search command invocation."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["sort", "dest", str(tmp_yaml)])
 
@@ -148,7 +148,7 @@ def test_sort_error(tmp_yaml: pathlib.Path) -> None:
 
 
 def test_validate() -> None:
-    """Command line test for search command."""
+    """Ensure correct exit code for validate command."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["validate", "tests/data/path.yaml"])
 
@@ -156,7 +156,7 @@ def test_validate() -> None:
 
 
 def test_validate_bad_schema() -> None:
-    """Command line test for search command."""
+    """Ensure correct exit code for validating bad schemas."""
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["validate", "tests/data/bad_schema.yaml"])
 
@@ -164,7 +164,7 @@ def test_validate_bad_schema() -> None:
 
 
 def test_validate_invalid_row() -> None:
-    """Command line test for search command."""
+    """Ensure correct exit code for validating invalid row."""
     runner = testing.CliRunner()
     result = runner.invoke(
         main.app, ["validate", "tests/data/invalid_row.yaml"]
