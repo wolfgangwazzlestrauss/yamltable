@@ -9,7 +9,7 @@ from typing import Iterable, List
 import typer
 
 
-app = typer.Typer(help="Script for cleaing unversion files.")
+app = typer.Typer(help=__doc__)
 
 
 @app.command()
