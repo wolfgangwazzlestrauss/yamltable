@@ -1,4 +1,4 @@
-"""Script for cleaing unversion files."""
+"""Script for cleaing unversioned files."""
 
 
 import pathlib

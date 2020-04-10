@@ -1,6 +1,6 @@
 {
   "name": "yamltable",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "CLI for working with YAML files organized similar to a relational database table.",
   "scripts": {
     "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",

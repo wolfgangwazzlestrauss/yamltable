@@ -18,7 +18,7 @@ def build() -> None:
 
 
 def run(command: str, error_msg: str) -> None:
-    """Prepare documentation and run command.
+    """Prepare documentation and run given command.
 
     Args:
         command: Command to execute after preparing documentation.
