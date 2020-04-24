@@ -714,7 +714,12 @@ classes, functions and methods.</p>
 100
 101
 102
-103</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
+103
+104
+105
+106
+107
+108</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Search dictionaries by key and value.</span>
 
 <span class="sd">    Args:</span>
@@ -724,6 +729,11 @@ classes, functions and methods.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Matching dictionaries.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; rows = [{&quot;foo&quot;: 1, &quot;bar&quot;: 2}, {&quot;foo&quot;: 5, &quot;bar&quot;: 6}]</span>
+<span class="sd">        &gt;&gt;&gt; search(&quot;bar&quot;, 6, rows)</span>
+<span class="sd">        [{&#39;foo&#39;: 5, &#39;bar&#39;: 6}]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">row</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">]</span>
 </code></pre></div>
@@ -777,20 +787,31 @@ classes, functions and methods.</p>
 </tr>
 </tbody>
 </table>
+<p>Examples:
+    &gt;&gt;&gt; rows = [{"foo": 1, "bar": 2}, {"foo": 5, "bar": 6}]
+    &gt;&gt;&gt; search("bar", 6, rows)
+    [{'foo': 5, 'bar': 6}]</p>
 </div>
 <h2 id="yamltable.__init__.sort"><code class="codehilite"><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__init__.sort" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>106
-107
-108
-109
-110
-111
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>111
 112
 113
 114
 115
-116</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Sort dictionaries based on value for supplied key name.</span>
 
 <span class="sd">    Args:</span>
@@ -799,6 +820,13 @@ classes, functions and methods.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        List of sorted dictionaries.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; rows = [{&quot;foo&quot;: 5, &quot;bar&quot;: 2}, {&quot;foo&quot;: 3, &quot;bar&quot;: 6}]</span>
+<span class="sd">        &gt;&gt;&gt; sort(&quot;foo&quot;, rows)</span>
+<span class="sd">        [{&#39;foo&#39;: 3, &#39;bar&#39;: 6}, {&#39;foo&#39;: 5, &#39;bar&#39;: 2}]</span>
+<span class="sd">        &gt;&gt;&gt; sort(&quot;bar&quot;, rows)</span>
+<span class="sd">        [{&#39;foo&#39;: 5, &#39;bar&#39;: 2}, {&#39;foo&#39;: 3, &#39;bar&#39;: 6}]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
 </code></pre></div>
@@ -846,22 +874,16 @@ classes, functions and methods.</p>
 </tr>
 </tbody>
 </table>
+<p>Examples:
+    &gt;&gt;&gt; rows = [{"foo": 5, "bar": 2}, {"foo": 3, "bar": 6}]
+    &gt;&gt;&gt; sort("foo", rows)
+    [{'foo': 3, 'bar': 6}, {'foo': 5, 'bar': 2}]
+    &gt;&gt;&gt; sort("bar", rows)
+    [{'foo': 5, 'bar': 2}, {'foo': 3, 'bar': 6}]</p>
 </div>
 <h2 id="yamltable.__init__.validate"><code class="codehilite"><span class="n">validate</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__init__.validate" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>131
 132
 133
 134
@@ -876,7 +898,19 @@ classes, functions and methods.</p>
 143
 144
 145
-146</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
     <span class="n">rows</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Check that each row satisfies the schema.</span>
@@ -952,19 +986,7 @@ classes, functions and methods.</p>
 </div>
 <h2 id="yamltable.__init__.write"><code class="codehilite"><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code><a class="headerlink" href="#yamltable.__init__.write" title="Permanent link">&para;</a></h2>
 <div class="autodoc">
-<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
+<details class="note"><summary>Show source code in <code>yamltable/__init__.py</code></summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>161
 162
 163
 164
@@ -972,7 +994,19 @@ classes, functions and methods.</p>
 166
 167
 168
-169</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
     <span class="n">file_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
     <span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Row</span><span class="p">],</span>
     <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Schema</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
