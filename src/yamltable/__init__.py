@@ -99,6 +99,11 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
 
     Returns:
         Matching dictionaries.
+
+    Examples:
+        >>> rows = [{"foo": 1, "bar": 2}, {"foo": 5, "bar": 6}]
+        >>> search("bar", 6, rows)
+        [{'foo': 5, 'bar': 6}]
     """
     return [row for row in rows if key in row and row[key] == val]
 
@@ -112,6 +117,13 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
 
     Returns:
         List of sorted dictionaries.
+
+    Examples:
+        >>> rows = [{"foo": 5, "bar": 2}, {"foo": 3, "bar": 6}]
+        >>> sort("foo", rows)
+        [{'foo': 3, 'bar': 6}, {'foo': 5, 'bar': 2}]
+        >>> sort("bar", rows)
+        [{'foo': 5, 'bar': 2}, {'foo': 3, 'bar': 6}]
     """
     return sorted(rows, key=lambda row: row[key])
 
