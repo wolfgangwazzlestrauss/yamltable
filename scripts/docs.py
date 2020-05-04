@@ -66,7 +66,7 @@ def cli_docs(repo_path: pathlib.Path) -> None:
             )
         except subprocess.CalledProcessError:
             typer.secho(
-                f"Error: Failed to build command line interface documentation.",
+                "Error: Failed to build command line interface documentation.",
                 fg=typer.colors.RED,
                 err=True,
             )
