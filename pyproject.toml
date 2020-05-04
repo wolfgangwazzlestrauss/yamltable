@@ -28,7 +28,7 @@ keywords = ["yaml"]
 license = "MIT"
 name = "yamltable"
 readme = "README.md"
-version = "0.0.9"
+version = "0.0.10"
 
 [tool.poetry.dependencies]
 jsonschema = "^3.2.0"
