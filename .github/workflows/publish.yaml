@@ -45,7 +45,7 @@ jobs:
           # prettier-ignore
           asset_path: ./dist/yamltable-${{ steps.extract_tag.outputs.tag }}-py3-none-any.whl
           # prettier-ignore
-          asset_name: yamltable-${{ steps.extract_tag.outputs.tag }}-py3-none-any.whl
+          asset_name: yamltable-py3-none-any.whl
           asset_content_type: application/x-binary
       - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@master

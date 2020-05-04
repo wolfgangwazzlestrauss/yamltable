@@ -70,14 +70,20 @@ rows:
 
 YamlTable can be installed for Python 3.6+ with `pipx`.
 
-```bash
+```console
 pipx install yamltable
 ```
 
 To reuse its library functions install with `pip`.
 
-```bash
+```console
 pip install --user yamltable
+```
+
+The latest release can also be downloaded and installed from GitHub.
+
+```console
+pip install --user https://github.com/wolfgangwazzlestrauss/yamltable/releases/latest/download/yamltable-py3-none-any.whl
 ```
 
 ### Commands
