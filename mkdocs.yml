@@ -1,11 +1,11 @@
 copyright: Copyright &copy; 2020 Macklan Weinstein
 extra:
   social:
-    - type: home
+    - icon: fontawesome/brands/github-alt
       link: https://wolfgangwazzlestrauss.com
-    - type: github
+    - icon: fontawesome/brands/github-alt
       link: https://github.com/wolfgangwazzlestrauss
-    - type: inbox
+    - icon: fontawesome/brands/github-alt
       link: mailto://wolfgangwazzlestrauss@gmail.com
 extra_javascript:
   - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
@@ -15,8 +15,6 @@ markdown_extensions:
   - codehilite:
       guess_lang: false
       linenums: true
-  - footnotes
-  - meta
   - pymdownx.arithmatex
   - pymdownx.betterem:
       smart_enable: all
@@ -30,15 +28,25 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.tabbed
   - pymdownx.tilde
   - toc:
       permalink: true
 nav:
   - Home: index.md
-  - User Guide: src/user/index.md
-  - API Reference: src/reference/index.md
-  - Developer Guide: src/developer/index.md
+  - Install:
+      - src/install.md
+  - Learn:
+      - src/learn/index.md
+  - API:
+      - API: src/api/index.md
+      - CLI: src/api/cli.md
+  - Contribute:
+      - Welcome: src/contrib/index.md
+      - Roadmap: src/contrib/roadmap.md
 plugins:
+  - minify:
+      minify_html: true
   - mkdocstrings
   - search
 repo_name: yamltable
@@ -50,6 +58,8 @@ site_description: |
 site_name: YamlTable
 site_url: https://wolfgangwazzlestrauss.github.io/yamltable/index
 theme:
+  features:
+    - tabs
   name: material
   palette:
     accent: cyan

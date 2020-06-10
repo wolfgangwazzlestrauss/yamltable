@@ -54,7 +54,7 @@ def cli_docs(repo_path: pathlib.Path) -> None:
     Args:
         repo_path: Repository root path.
     """
-    cli_doc = repo_path / "docs/src/user/cli.md"
+    cli_doc = repo_path / "docs/src/api/cli.md"
 
     with cli_doc.open("w") as handle:
         try:

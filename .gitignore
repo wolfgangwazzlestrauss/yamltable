@@ -12,7 +12,7 @@
 **/nohup.out
 dist/*
 docs/index.md
-docs/src/user/cli.md
+docs/src/api/cli.md
 node_modules/*
 package-lock.json
 poetry.lock
