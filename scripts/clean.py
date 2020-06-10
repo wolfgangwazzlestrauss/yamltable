@@ -19,6 +19,7 @@ def clean(
     )
 ) -> None:
     """Remove unversioned files from project."""
+
     rules = ignore_rules()
     paths = ignore_paths(rules)
 
@@ -38,6 +39,7 @@ def ignore_paths(rules: Iterable[str]) -> List[pathlib.Path]:
     Returns:
         Git ignored paths.
     """
+
     paths = (pathlib.Path(rule.replace("*", "")) for rule in rules)
     return [path for path in paths if path.exists()]
 
@@ -51,6 +53,7 @@ def ignore_rules() -> List[str]:
     Returns:
         List of all root level ignore rules.
     """
+
     repo_path = pathlib.Path(__file__).parents[1]
     file_path = repo_path / ".gitignore"
 
@@ -69,6 +72,7 @@ def remove_paths(paths: Iterable[pathlib.Path]) -> None:
     Raises:
         ValueError: If path is not a file or directory.
     """
+
     for path in paths:
         if path.is_file():
             path.unlink()

@@ -8,6 +8,7 @@ import yamltable
 
 def test_sort_dict(tmp_path: pathlib.Path) -> None:
     """Test sorting and overwriting file."""
+
     yaml_file = tmp_path / "file.yaml"
     yaml_file.write_text(
         "schema:\n  type: object\n"
@@ -28,6 +29,7 @@ def test_sort_dict(tmp_path: pathlib.Path) -> None:
 
 def test_sort_list(tmp_path: pathlib.Path) -> None:
     """Test sorting and overwriting file."""
+
     yaml_file = tmp_path / "file.yaml"
     yaml_file.write_text("- foo: 1\n  bar: 4\n- foo: 3\n  bar: 2\n")
 

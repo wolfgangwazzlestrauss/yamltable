@@ -22,6 +22,7 @@ class Format(enum.Enum):
 @app.command()
 def clean() -> None:
     """Clean profiling local cache."""
+
     local_cache = pathlib.Path("scripts/.cache/profile")
     for path in local_cache.iterdir():
         path.unlink()
@@ -29,6 +30,7 @@ def clean() -> None:
 
 def _launch(prof_path: pathlib.Path, fmt: Format) -> None:
     """Open profiler output in web browser."""
+
     if fmt == Format.SPEEDSCOPE:
         run_command(
             f"npm run profile -- {prof_path}",
@@ -49,6 +51,7 @@ def _prof_path(fmt: Format) -> pathlib.Path:
     Returns:
         Profiler results output path.
     """
+
     prof_dir = pathlib.Path("scripts/.cache/profile")
     if fmt == Format.SPEEDSCOPE:
         prof_file = "speedscope.json"
@@ -70,6 +73,7 @@ def record(
     ),
 ) -> None:
     """Profile Python PROGRAM with py-spy."""
+
     prof_path = _prof_path(fmt)
 
     pyspy = f"py-spy record --format {fmt.value}"
@@ -87,6 +91,7 @@ def run_command(command: str, error_msg: str) -> None:
         command: Command to execute after preparing documentation.
         error_msg: Error message if command fails.
     """
+
     try:
         subprocess.run(args=command, shell=True, check=True)
     except subprocess.CalledProcessError:

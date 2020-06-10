@@ -26,6 +26,7 @@ app = typer.Typer(
 @app.command(name="index")
 def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
     """Get row at INDEX in FILE_PATH."""
+
     rows, _ = load_data(file_path)
 
     try:
@@ -44,6 +45,7 @@ def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
 @app.command(name="list")
 def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
     """List all dictionary KEY values in FILE_PATH."""
+
     rows, _ = load_data(file_path)
 
     for idx, row in enumerate(rows):
@@ -67,6 +69,7 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
     Returns:
         YAML row data, YAML schema
     """
+
     try:
         return yamltable.read(file_path)
     except (FileNotFoundError, TypeError) as xcpt:
@@ -77,6 +80,7 @@ def load_data(file_path: pathlib.Path) -> Tuple[List[Row], Optional[Schema]]:
 @app.command()
 def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
     """Search dictionaries in FILE_PATH with matching KEY and VALUE pairs."""
+
     rows, _ = load_data(file_path)
     matches = yamltable.search(key, value, rows)
 
@@ -93,6 +97,7 @@ def search(key: str, value: str, file_path: pathlib.Path = FileArg) -> None:
 @app.command()
 def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
     """Sort dictionaries in FILE_PATH by KEY values."""
+
     rows, schema = load_data(file_path)
 
     try:
@@ -107,6 +112,7 @@ def sort(key: str, file_path: pathlib.Path = FileArg) -> None:
 @app.command()
 def validate(file_path: pathlib.Path = FileArg) -> None:
     """Check that every dictionary in FILE_PATH has conforms to its schema."""
+
     rows, schema = load_data(file_path)
     valid, row, msg = yamltable.validate(rows, schema)
 
@@ -130,6 +136,7 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
 @app.command()
 def version() -> None:
     """Display application version."""
+
     typer.secho(f"yamltable {yamltable.__version__}")
 
 

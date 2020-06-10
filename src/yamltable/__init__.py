@@ -29,6 +29,7 @@ def dependencies(unsorted: Sequence[Row], depends: str, name: str) -> List[Row]:
     Returns:
         Rows sorted by requirements.
     """
+
     sorted_: List[Row] = []
     while unsorted:
         # Find rows containing only dependencies in sorted_.
@@ -68,6 +69,7 @@ def read(
     Returns:
         YAML data.
     """
+
     if isinstance(stream, pathlib.Path):
         stream = stream.read_text()
 
@@ -105,6 +107,7 @@ def search(key: str, val: Any, rows: Iterable[Row]) -> List[Row]:
         >>> search("bar", 6, rows)
         [{'foo': 5, 'bar': 6}]
     """
+
     return [row for row in rows if key in row and row[key] == val]
 
 
@@ -125,6 +128,7 @@ def sort(key: str, rows: Iterable[Row]) -> List[Row]:
         >>> sort("bar", rows)
         [{'foo': 5, 'bar': 2}, {'foo': 3, 'bar': 6}]
     """
+
     return sorted(rows, key=lambda row: row[key])
 
 
@@ -141,6 +145,7 @@ def validate(
         Whether all rows are valid, invalid row index or -1,
             invalid error message.
     """
+
     try:
         jsonschema.Draft7Validator.check_schema(schema)
     except (exceptions.SchemaError, exceptions.UnknownType) as xcpt:
@@ -172,6 +177,7 @@ def write(
         schema: JSON schema dictionary.
         sort_keys: Whether to sort row keys.
     """
+
     if schema is None:
         with open(file_path, "w") as handle:
             yaml.dump(rows, handle, sort_keys=sort_keys)

@@ -13,6 +13,7 @@ def schema(scope: str = "module") -> Schema:
     Return:
         JSON schema dictionary
     """
+
     return {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
