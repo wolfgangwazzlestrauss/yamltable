@@ -1,4 +1,4 @@
-"""Unit test functions from the yamltable module."""
+"""Unit tests for the yamltable library."""
 
 
 from typing import List

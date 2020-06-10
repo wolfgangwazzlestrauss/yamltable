@@ -1,4 +1,4 @@
-"""Integration tests for the yamltable module."""
+"""Integration tests for the yamltable library."""
 
 
 import pathlib
