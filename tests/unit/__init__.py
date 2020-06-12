@@ -4,6 +4,7 @@
 from typing import List
 
 import pytest
+import pytest_benchmark.fixture as bm
 
 import yamltable
 from yamltable.typing import Row, Schema
@@ -35,7 +36,7 @@ def test_read_good_data(file_data: str, expected: List[Row]) -> None:
     assert actual == expected
 
 
-def test_search() -> None:
+def test_search(benchmark: bm.BenchmarkFixture) -> None:
     """Check that searching works for unnested list of dictionaries."""
 
     dicts = [
@@ -44,11 +45,11 @@ def test_search() -> None:
     ]
 
     expected = [{"mock_key_1": 2, "mock_key_2": 3}]
-    actual = yamltable.search("mock_key_2", 3, dicts)
+    actual = benchmark(yamltable.search, "mock_key_2", 3, dicts)
     assert actual == expected
 
 
-def test_sort() -> None:
+def test_sort(benchmark: bm.BenchmarkFixture) -> None:
     """Check that sorting works for unnested list of dictionaries."""
 
     dicts = [
@@ -60,11 +61,11 @@ def test_sort() -> None:
         {"mock_key_1": 2, "mock_key_2": 3},
         {"mock_key_1": 1, "mock_key_2": 5},
     ]
-    actual = yamltable.sort("mock_key_2", dicts)
+    actual = benchmark(yamltable.sort, "mock_key_2", dicts)
     assert actual == expected
 
 
-def test_dependencies() -> None:
+def test_dependencies(benchmark: bm.BenchmarkFixture) -> None:
     """Check that dependencies are resolved."""
 
     dicts = [
@@ -77,7 +78,7 @@ def test_dependencies() -> None:
         {"name": 1, "depends": [2]},
     ]
 
-    actual = yamltable.dependencies(dicts, "depends", "name")
+    actual = benchmark(yamltable.dependencies, dicts, "depends", "name")
     assert actual == expected
 
 
@@ -93,7 +94,7 @@ def test_dependencies_circular_error() -> None:
         yamltable.dependencies(dicts, "depends", "name")
 
 
-def test_validate_bad_schema() -> None:
+def test_validate_bad_schema(benchmark: bm.BenchmarkFixture) -> None:
     """Check that validation works for unnested list of dictionaries."""
 
     schema_ = {"type": "data"}
@@ -103,12 +104,14 @@ def test_validate_bad_schema() -> None:
     ]
 
     expected = (False, -1, "'data' is not valid under any of the given schemas")
-    result = yamltable.validate(dicts, schema_)
+    result = benchmark(yamltable.validate, dicts, schema_)
     actual = (result[0], result[1], result[2].split("\n")[0])
     assert actual == expected
 
 
-def test_validate_bad_data(schema: Schema) -> None:
+def test_validate_bad_data(
+    schema: Schema, benchmark: bm.BenchmarkFixture
+) -> None:
     """Check that validation works for unnested list of dictionaries."""
 
     dicts = [
@@ -117,12 +120,14 @@ def test_validate_bad_data(schema: Schema) -> None:
     ]
 
     expected = (False, 1, "False is not of type 'number'")
-    result = yamltable.validate(dicts, schema)
+    result = benchmark(yamltable.validate, dicts, schema)
     actual = (result[0], result[1], result[2].split("\n")[0])
     assert actual == expected
 
 
-def test_validate_good_data(schema: Schema) -> None:
+def test_validate_good_data(
+    schema: Schema, benchmark: bm.BenchmarkFixture
+) -> None:
     """Check that validation works for unnested list of dictionaries."""
 
     dicts = [
@@ -131,5 +136,5 @@ def test_validate_good_data(schema: Schema) -> None:
     ]
 
     expected = (True, -1, "")
-    actual = yamltable.validate(dicts, schema)
+    actual = benchmark(yamltable.validate, dicts, schema)
     assert actual == expected
