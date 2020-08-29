@@ -102,4 +102,4 @@ contributors.
 
 ## License
 
-Licensed under the [MIT](license.txt) license.
+Licensed under the [MIT license](license.md).

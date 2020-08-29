@@ -45,7 +45,10 @@ def copy_files(repo_path: pathlib.Path) -> None:
         repo_path: Repository root path.
     """
 
-    paths = [("README.md", "docs/index.md")]
+    paths = [
+        ("README.md", "docs/index.md"),
+        ("LICENSE.md", "docs/license.md"),
+    ]
 
     for src, dest in paths:
         shutil.copy(src=repo_path / src, dst=repo_path / dest)
