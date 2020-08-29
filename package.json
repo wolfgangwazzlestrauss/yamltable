@@ -1,4 +1,5 @@
 {
+  "private": true,
   "scripts": {
     "format": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
     "lint": "prettier --check **/*.{css,html,js,json,md,yaml,yml}"

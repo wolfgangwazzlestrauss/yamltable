@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.8
       - name: Install dependencies
@@ -47,6 +47,8 @@ jobs:
           # prettier-ignore
           asset_name: yamltable-py3-none-any.whl
           asset_content_type: application/x-binary
+      # Use PyPI publish action over Poetry publish to prevent PyPI password
+      # from being printed in CI logs.
       - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@master
         with:

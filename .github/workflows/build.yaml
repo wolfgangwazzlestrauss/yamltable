@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.8
+          node-version: 14
       - name: Install Node dependencies
         run: |
           npm install
@@ -22,7 +22,7 @@ jobs:
         run: |
           npm run lint
       - name: Install Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.8
       - name: Install Python dependencies
@@ -41,9 +41,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python }}
       - name: Install dependencies

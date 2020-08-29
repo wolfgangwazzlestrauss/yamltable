@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Install Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: 3.8
       - name: Install dependencies
@@ -20,7 +20,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry install -v
-      - name: Build and test with tox
+      - name: Build, test, and upload coverage report
         run: |
           poetry run pytest --cov --cov-fail-under=0 --cov-report=xml
       - name: Upload coverage to Codecov
