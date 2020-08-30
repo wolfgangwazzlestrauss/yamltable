@@ -22,6 +22,7 @@ source = ["yamltable"]
 
 [tool.poetry]
 authors = ["Macklan Weinstein <wolfgangwazzlestrauss@gmail.com>"]
+classifiers = ["Programming Language :: Python :: 3.6"]
 description = "Command line utility for list organized YAML files."
 homepage = "https://github.com/wolfgangwazzlestrauss/yamltable"
 keywords = ["yaml"]
