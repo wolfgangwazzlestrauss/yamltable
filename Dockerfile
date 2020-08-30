@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 
 # Set system language settings.
 ENV LANG=en_US.UTF-8 LC_ALL=C.UTF-8
