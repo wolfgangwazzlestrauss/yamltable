@@ -24,5 +24,5 @@ your `PATH`, then add the install location to your `PATH` environment variable.
 Once YamlTable is installed, you can try it out from the command line with
 `yamltable --help` or import it in a Python script with `import yamltable`. For
 instructions about using YamlTable from the command line, visit the
-[CLI guide](api/cli.md). For instructions about using YamlTable as a Python
-library, visit the [API reference](api/index.md).
+[CLI guide](/api/cli.md). For instructions about using YamlTable as a Python
+library, visit the [API reference](/api/index.md).

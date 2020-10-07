@@ -37,15 +37,15 @@ nav:
       - Home: index.md
       - License: license.md
   - Install:
-      - src/install.md
+      - Install: install/index.md
   - Learn:
-      - src/learn/index.md
+      - Learn: learn/index.md
   - API:
-      - API: src/api/index.md
-      - CLI: src/api/cli.md
+      - API: api/index.md
+      - CLI: api/cli.md
   - Contribute:
-      - Welcome: src/contrib/index.md
-      - Roadmap: src/contrib/roadmap.md
+      - Contribute: contrib/index.md
+      - Roadmap: contrib/roadmap.md
 plugins:
   - minify:
       minify_html: true
