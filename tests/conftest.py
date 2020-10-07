@@ -5,8 +5,6 @@ import pathlib
 
 import pytest
 
-import yamltable
-
 
 @pytest.fixture
 def tmp_yaml(tmp_path: pathlib.Path) -> pathlib.Path:
