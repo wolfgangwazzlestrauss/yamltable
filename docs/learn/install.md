@@ -12,9 +12,17 @@ recommended for Windows.
 
 YamlTable can be installed with the PIP package manager.
 
-```console
-pip install --user yamltable
-```
+=== "PyPI"
+
+    ```console
+    pip install yamltable
+    ```
+
+=== "GitHub"
+
+    ```console
+    pip install git+https://github.com/wolfgangwazzlestrauss/yamltable.git
+    ```
 
 If you receive a script warning about the install location not being found on
 your `PATH`, then add the install location to your `PATH` environment variable.

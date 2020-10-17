@@ -35,14 +35,14 @@ markdown_extensions:
 nav:
   - Home:
       - Home: index.md
+      - Changelog: changelog.md
       - License: license.md
-  - Install:
-      - Install: install/index.md
   - Learn:
-      - Learn: learn/index.md
-  - API:
-      - API: api/index.md
-      - CLI: api/cli.md
+      - Install: learn/install.md
+      - Troubleshoot: learn/troubleshoot.md
+  - Reference:
+      - API: reference/api.md
+      - CLI: reference/cli.md
   - Contribute:
       - Contribute: contrib/index.md
       - Roadmap: contrib/roadmap.md

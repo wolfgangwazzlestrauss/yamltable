@@ -14,7 +14,7 @@
 dist/
 docs/index.md
 docs/license.md
-docs/api/cli.md
+docs/reference/cli.md
 node_modules/
 package-lock.json
 poetry.lock
