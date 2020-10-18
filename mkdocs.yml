@@ -35,16 +35,17 @@ markdown_extensions:
 nav:
   - Home:
       - Home: index.md
-      - Changelog: changelog.md
       - License: license.md
+      - Changelog: changelog.md
   - Learn:
       - Install: learn/install.md
-      - Troubleshoot: learn/troubleshoot.md
+      - Guide: learn/guide.md
+      - FAQ: learn/faq.md
   - Reference:
       - API: reference/api.md
       - CLI: reference/cli.md
   - Contribute:
-      - Contribute: contrib/index.md
+      - Develop: contrib/develop.md
       - Roadmap: contrib/roadmap.md
 plugins:
   - minify:
@@ -61,7 +62,7 @@ site_name: YamlTable
 site_url: https://wolfgangwazzlestrauss.github.io/yamltable/index
 theme:
   features:
-    - tabs
+    - navigation.tabs
   name: material
   palette:
     accent: cyan

@@ -13,6 +13,7 @@
 **/*.egg-info/
 **/nohup.out
 dist/
+docs/changelog.md
 docs/index.md
 docs/license.md
 docs/reference/cli.md
