@@ -11,6 +11,10 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 
 - Changelog support.
 
+### Changed
+
+- Poetry build backend.
+
 ## 0.1.5 - 2020-08-29
 
 ### Changed
