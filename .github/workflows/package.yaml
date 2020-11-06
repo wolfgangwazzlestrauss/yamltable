@@ -1,10 +1,10 @@
-name: publish
+name: package
 on:
   push:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
-  publish:
+  package:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout

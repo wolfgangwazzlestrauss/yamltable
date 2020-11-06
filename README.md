@@ -68,38 +68,30 @@ rows:
 
 ### Installation
 
-YamlTable can be installed for Python 3.6+ with `pipx`.
+YamlTable can be installed for Python 3.6+ with
 
 ```console
-pipx install yamltable
+pip install yamltable
 ```
 
-To reuse its library functions install with `pip`.
-
-```console
-pip install --user yamltable
-```
-
-The latest release can also be downloaded and installed from GitHub.
-
-```console
-pip install --user https://github.com/wolfgangwazzlestrauss/yamltable/releases/latest/download/yamltable-py3-none-any.whl
-```
+For more installation instructions, see the
+[Install](https://wolfgangwazzlestrauss.github.io/yamltable/install/) section of
+the documentation.
 
 ### Commands
 
-YamlTable provides the following commands for working with YAML files:
-
-- `list`: list dictionary key values
-- `search`: search dictionaries by key and value
-- `sort`: sort dictionaries by key and value
-- `validate`: validate that dictionaries conform to the given JSON schema
+YamlTable provides a CLI command
+[reference](https://wolfgangwazzlestrauss.github.io/yamltable/api/cli/) in its
+documenation.
 
 ## Contributing
 
-Since YamlTable is in an early development phase, it is not currently open to
-contributors.
+For guidance on setting up a development environment and how to make a
+contribution, see the
+[Contributing](https://wolfgangwazzlestrauss.github.io/yamltable/contrib/)
+section of the documentation.
 
 ## License
 
-Licensed under the [MIT license](license.md).
+YamlTable is licensed under the
+[MIT license](https://wolfgangwazzlestrauss.github.io/yamltable/license/).

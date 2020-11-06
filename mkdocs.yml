@@ -37,15 +37,16 @@ nav:
       - Home: index.md
       - License: license.md
       - Changelog: changelog.md
-  - Learn:
+  - Install:
       - Install: learn/install.md
+  - Learn:
       - Guide: learn/guide.md
       - FAQ: learn/faq.md
-  - Reference:
-      - API: reference/api.md
-      - CLI: reference/cli.md
+  - API:
+      - API: api/index.md
+      - CLI: api/cli.md
   - Contribute:
-      - Develop: contrib/develop.md
+      - Develop: contrib/index.md
       - Roadmap: contrib/roadmap.md
 plugins:
   - minify:

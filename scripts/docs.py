@@ -11,7 +11,7 @@ def build_docs() -> None:
     """Build documentation with MkDocs."""
 
     try:
-        subprocess.run(args="mkdocs build", shell=True, check=True)
+        subprocess.run(args="mkdocs build --strict", shell=True, check=True)
     except subprocess.CalledProcessError:
         print("Failed to build project documentation.", sys.stderr)
         sys.exit(1)
@@ -41,7 +41,7 @@ def generate_cli_docs(repo_path: Path) -> None:
         repo_path: Repository root path.
     """
 
-    cli_doc = repo_path / "docs/reference/cli.md"
+    cli_doc = repo_path / "docs/api/cli.md"
 
     with cli_doc.open("w") as handle:
         try:
