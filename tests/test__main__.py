@@ -4,6 +4,7 @@
 import pathlib
 import pprint
 
+import pytest
 from typer import testing
 import yaml
 
@@ -12,6 +13,7 @@ import yamltable.__main__ as main
 from yamltable.typing import ExitCode
 
 
+@pytest.mark.functional
 def test_index() -> None:
     """Ensure correct stdout for index command."""
 
@@ -34,6 +36,7 @@ def test_index() -> None:
     assert actual == expected
 
 
+@pytest.mark.functional
 def test_index_error() -> None:
     """Ensure correct exit code for erroneous index command invocation."""
 
@@ -43,6 +46,7 @@ def test_index_error() -> None:
     assert result.exit_code == ExitCode.ERROR.value
 
 
+@pytest.mark.functional
 def test_load_data_error() -> None:
     """Ensure correct exit code when loading badly formatted YAML file."""
 
@@ -54,6 +58,7 @@ def test_load_data_error() -> None:
     assert result.exit_code == ExitCode.ERROR.value
 
 
+@pytest.mark.functional
 def test_list() -> None:
     """Ensure correct stdout for list command."""
 
@@ -79,6 +84,7 @@ def test_list() -> None:
     assert actual == expected
 
 
+@pytest.mark.functional
 def test_list_error() -> None:
     """Ensure correct exit code for erroneous list command invocation."""
 
@@ -90,6 +96,7 @@ def test_list_error() -> None:
     assert result.exit_code == ExitCode.ERROR.value
 
 
+@pytest.mark.functional
 def test_search() -> None:
     """Ensure correct stdout for search command."""
 
@@ -114,6 +121,7 @@ def test_search() -> None:
     assert actual == expected
 
 
+@pytest.mark.functional
 def test_search_empty() -> None:
     """Ensure correct stdout for search command with no results."""
 
@@ -129,6 +137,7 @@ def test_search_empty() -> None:
     assert actual == expected
 
 
+@pytest.mark.functional
 def test_sort(tmp_path: pathlib.Path) -> None:
     """Ensure correct stdout for sort command."""
 
@@ -148,6 +157,7 @@ def test_sort(tmp_path: pathlib.Path) -> None:
     assert actual == expected
 
 
+@pytest.mark.functional
 def test_sort_error(tmp_yaml: pathlib.Path) -> None:
     """Ensure correct exit code for erroneous search command invocation."""
 
@@ -157,6 +167,7 @@ def test_sort_error(tmp_yaml: pathlib.Path) -> None:
     assert result.exit_code == ExitCode.ERROR.value
 
 
+@pytest.mark.functional
 def test_validate() -> None:
     """Ensure correct exit code for validate command."""
 
@@ -166,6 +177,7 @@ def test_validate() -> None:
     assert result.exit_code == ExitCode.SUCCESS.value
 
 
+@pytest.mark.functional
 def test_validate_bad_schema() -> None:
     """Ensure correct exit code for validating bad schemas."""
 
@@ -175,6 +187,7 @@ def test_validate_bad_schema() -> None:
     assert result.exit_code == ExitCode.ERROR.value
 
 
+@pytest.mark.functional
 def test_validate_invalid_row() -> None:
     """Ensure correct exit code for validating invalid row."""
 
@@ -186,6 +199,7 @@ def test_validate_invalid_row() -> None:
     assert result.exit_code == ExitCode.INVALID.value
 
 
+@pytest.mark.functional
 def test_version() -> None:
     """Ensure display of project version."""
 

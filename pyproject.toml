@@ -67,7 +67,12 @@ typer-cli = "^0.0.10"
 yamltable = "yamltable.__main__:app"
 
 [tool.pytest.ini_options]
-addopts = "-sv --benchmark-autosave"
+addopts = "-sv"
+markers = [
+    "functional: mark as functional test.",
+    "integration: mark as integration test.",
+    "unit: mark as unit test.",
+]
 python_classes = "Test*"
 python_files = [
     "__init__.py",
