@@ -6,7 +6,7 @@ on:
       - feature/*
       - master
 jobs:
-  static:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Code repository checkout
@@ -31,7 +31,7 @@ jobs:
           python -m pip install tox
       - name: Build and static test Python code
         run: |
-          tox -e static
+          tox -e lint
   test:
     strategy:
       fail-fast: false
