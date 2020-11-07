@@ -65,3 +65,13 @@ typer-cli = "^0.0.10"
 
 [tool.poetry.scripts]
 yamltable = "yamltable.__main__:app"
+
+[tool.pytest.ini_options]
+addopts = "-sv --benchmark-autosave"
+python_classes = "Test*"
+python_files = [
+    "__init__.py",
+    "test_*.py",
+]
+python_functions = ["test_*"]
+testpaths = ["tests"]
