@@ -53,3 +53,48 @@ jobs:
       - name: Build and test with tox
         run: |
           tox -e py
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+          poetry install -v
+      - name: Build, test, and upload benchmark report
+        run: |
+          poetry run pytest --benchmark-json benchmark.json
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: benchmark
+          path: benchmark.json
+          retention-days: 30
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code repository checkout
+        uses: actions/checkout@v2
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install poetry
+          poetry install -v
+      - name: Build, test, and upload coverage report
+        run: |
+          poetry run pytest --cov --cov-fail-under=0 --cov-report=xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.xml
