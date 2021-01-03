@@ -8,8 +8,8 @@ import pytest
 from yamltable.typing import Schema
 
 
-@pytest.fixture
-def schema(scope: str = "module") -> Schema:
+@pytest.fixture(scope="module")
+def schema() -> Schema:
     """Create reusable JSON schema object.
 
     Return:

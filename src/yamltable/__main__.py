@@ -9,6 +9,7 @@ import pathlib
 import pprint
 from typing import List, Optional, Tuple
 
+from rich.console import Console, Theme
 import typer
 
 import yamltable
@@ -22,6 +23,9 @@ app = typer.Typer(
     )
 )
 
+theme = Theme({"empty": "yellow", "error": "red", "success": "green"})
+console = Console(theme=theme)
+
 
 @app.command(name="index")
 def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
@@ -32,14 +36,13 @@ def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
     try:
         row = rows[index]
     except IndexError:
-        typer.secho(
+        console.print(
             f"Error: Index {index} is out of bounds.",
-            fg=StatusColor.ERROR.value,
-            err=True,
+            style="error",
         )
         raise typer.Exit(code=ExitCode.ERROR.value)
     else:
-        typer.secho(pprint.pformat(row, indent=2))
+        console.print(pprint.pformat(row, indent=2), style="")
 
 
 @app.command(name="list")
@@ -117,9 +120,9 @@ def validate(file_path: pathlib.Path = FileArg) -> None:
     valid, row, msg = yamltable.validate(rows, schema)
 
     if valid:
-        typer.secho(
-            "YAML file rows conform to its schema.",
-            fg=StatusColor.SUCCESS.value,
+        console.print(
+            ":thumbs_up: YAML file rows conform to its schema.",
+            style="success",
         )
     elif row == -1:
         typer.secho(
