@@ -1,37 +1,48 @@
+# GitHub Actions workflow file.
+#
+# For more information, visit
+# https://docs.github.com/actions/learn-github-actions.
+
 name: build
+
+# Make workflow run only for commits pushed to the develop, feature, and master
+# branches.
 on:
   push:
     branches:
       - develop
       - feature/*
       - master
+
 jobs:
+  # Run linter tests on project files.
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Git checkout code repository
         uses: actions/checkout@v2
-      - name: Install Node
+      - name: Install Node interpreter
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Install Node dependencies
+      - name: Install Node packages
         run: |
           npm install
-      - name: Check format of configuration files
+      - name: Run format tests
         run: |
-          npm run lint-test
-      - name: Install Python
+          npm run prettier:test
+      - name: Install Python interpreter
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-      - name: Install Python dependencies
+      - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install tox
-      - name: Build and static test Python code
+          python -m pip install --upgrade pip setuptools tox wheel
+      - name: Run linter tests
         run: |
           tox -e lint
+
+  # Run Python tests on code.
   test:
     strategy:
       fail-fast: false
@@ -40,37 +51,37 @@ jobs:
         python: [3.6, 3.7, 3.8, 3.9]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Code repository checkout
+      - name: Git checkout code repository
         uses: actions/checkout@v2
-      - name: Install Python
+      - name: Install Python interpreter
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python }}
-      - name: Install dependencies
+      - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install tox
-      - name: Build and test with tox
+          python -m pip install --upgrade pip setuptools tox wheel
+      - name: Run Python tests with Tox
         run: |
           tox -e py
+
+  # Generate test code coverage report.
   report:
     runs-on: ubuntu-latest
     steps:
-      - name: Code repository checkout
+      - name: Git checkout code repository
         uses: actions/checkout@v2
-      - name: Install Python
+      - name: Install Python interpreter
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-      - name: Install dependencies
+      - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install poetry
+          python -m pip install --upgrade pip poetry setuptools wheel
           poetry install -v
-      - name: Build, test, and upload coverage report
+      - name: Create code coverage report
         run: |
           poetry run pytest --cov --cov-fail-under=0 --cov-report=xml
-      - name: Upload coverage to Codecov
+      - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
