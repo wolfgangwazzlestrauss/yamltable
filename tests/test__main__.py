@@ -3,7 +3,7 @@
 
 import pathlib
 import pprint
-from unittest.mock import MagicMock
+from unittest.mock import call, MagicMock
 
 import pytest
 from typer import testing
@@ -33,7 +33,7 @@ def test_index(console: MagicMock) -> None:
     )
 
     assert result.exit_code == ExitCode.SUCCESS.value
-    console.print.assert_called_once_with(expected, style="")
+    console.print.assert_called_once_with(expected)
 
 
 @pytest.mark.functional
@@ -59,29 +59,27 @@ def test_load_data_error() -> None:
 
 
 @pytest.mark.functional
-def test_list() -> None:
+def test_list(console: MagicMock) -> None:
     """Ensure correct stdout for list command."""
 
     runner = testing.CliRunner()
     result = runner.invoke(main.app, ["list", "name", "tests/data/path.yaml"])
 
-    expected = "\n".join(
-        [
-            "repo",
-            "ssh",
-            "bash-profile",
-            "system",
-            "bash-key",
-            "drive",
-            "vscode-settings",
-            "vscode-keybindings",
-            "vscode-snippets",
-        ]
-    )
-    actual = result.stdout.strip()
+    expected = [
+        call("repo"),
+        call("ssh"),
+        call("bash-profile"),
+        call("system"),
+        call("bash-key"),
+        call("drive"),
+        call("vscode-settings"),
+        call("vscode-keybindings"),
+        call("vscode-snippets"),
+    ]
 
     assert result.exit_code == ExitCode.SUCCESS.value
-    assert actual == expected
+
+    console.print.assert_has_calls(expected)
 
 
 @pytest.mark.functional

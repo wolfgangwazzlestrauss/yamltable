@@ -42,7 +42,7 @@ def index_(index: int, file_path: pathlib.Path = FileArg) -> None:
         )
         raise typer.Exit(code=ExitCode.ERROR.value)
     else:
-        console.print(pprint.pformat(row, indent=2), style="")
+        console.print(pprint.pformat(row, indent=2))
 
 
 @app.command(name="list")
@@ -53,12 +53,11 @@ def list_(key: str, file_path: pathlib.Path = FileArg) -> None:
 
     for idx, row in enumerate(rows):
         try:
-            typer.secho(row[key])
+            console.print(row[key])
         except KeyError:
-            typer.secho(
+            console.print(
                 f"Error: Row {idx} does not have key {key}.",
-                fg=StatusColor.ERROR.value,
-                err=True,
+                style="error",
             )
             raise typer.Exit(code=ExitCode.ERROR.value)
 
