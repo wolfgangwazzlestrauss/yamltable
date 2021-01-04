@@ -35,7 +35,7 @@ jobs:
           key: python-3.9_ubuntu-latest_poetry-${{ hashFiles('poetry.lock') }}
       - name: Install Python packages
         run: |
-          python -m pip install --upgrade pip poetry setuptools wheel
+          python -m pip install poetry
           poetry install -v
       - name: Build static site documentation
         run: |
