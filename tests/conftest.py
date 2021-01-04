@@ -2,10 +2,25 @@
 
 
 import pathlib
+from unittest.mock import MagicMock
 
 import pytest
+from pytest_mock import MockFixture
 
+import yamltable.__main__ as main
 from yamltable.typing import Schema
+
+
+@pytest.fixture
+def console(mocker: MockFixture) -> MagicMock:
+    """Replaces Rich console in CLI with a magic mock.
+
+    Return:
+        Magic mock instance.
+    """
+
+    main.console = MagicMock()
+    return main.console
 
 
 @pytest.fixture(scope="module")

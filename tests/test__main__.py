@@ -3,6 +3,7 @@
 
 import pathlib
 import pprint
+from unittest.mock import MagicMock
 
 import pytest
 from typer import testing
@@ -14,7 +15,7 @@ from yamltable.typing import ExitCode
 
 
 @pytest.mark.functional
-def test_index() -> None:
+def test_index(console: MagicMock) -> None:
     """Ensure correct stdout for index command."""
 
     runner = testing.CliRunner()
@@ -30,10 +31,9 @@ def test_index() -> None:
         },
         indent=2,
     )
-    actual = result.stdout.strip()
 
     assert result.exit_code == ExitCode.SUCCESS.value
-    assert actual == expected
+    console.print.assert_called_once_with(expected, style="")
 
 
 @pytest.mark.functional
