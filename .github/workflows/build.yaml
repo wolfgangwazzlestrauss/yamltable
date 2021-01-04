@@ -29,6 +29,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: Cache Node packages
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-14_ubuntu-latest_${{ hashFiles('package-lock.json') }}
       - name: Cache Python packages
         uses: actions/cache@v2
         with:
@@ -95,6 +100,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      - name: Cache Python packages
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: python-3.9_ubuntu-latest_poetry-${{ hashFiles('poetry.lock') }}
       - name: Install Python packages
         run: |
           python -m pip install --upgrade pip poetry setuptools wheel
